@@ -28,6 +28,7 @@
   "dependencies": {
     "@anthropic-ai/claude-code": "^2.1.288",
     "gitnexus": "^1.6.12",
+    "lucide-static": "^1.52.0",
     "omniroute": "^3.8.51"
   }
 }

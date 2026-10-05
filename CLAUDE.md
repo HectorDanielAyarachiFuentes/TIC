@@ -1,7 +1,7 @@
 <!-- gitnexus:start -->
 # GitNexus — Code Intelligence
 
-This project is indexed by GitNexus as **Vibecoding-Dulce** (7 symbols, 5 relationships, 0 execution flows).
+This project is indexed by GitNexus as **curza-stic-main** (483 symbols, 515 relationships, 2 execution flows).
 
 > Index stale? Run `node .gitnexus/run.cjs analyze --index-only` from the project root — it auto-selects an available runner. No `.gitnexus/run.cjs` yet? Bootstrap with `npx`, `bunx`, or `pnpm dlx` — e.g. `bunx gitnexus@latest analyze` (npm 11 npx crash; #1939).
 
@@ -25,10 +25,10 @@ This project is indexed by GitNexus as **Vibecoding-Dulce** (7 symbols, 5 relati
 
 | Resource | Use for |
 | --- | --- |
-| `gitnexus://repo/Vibecoding-Dulce/context` | Codebase overview, check index freshness |
-| `gitnexus://repo/Vibecoding-Dulce/clusters` | All functional areas |
-| `gitnexus://repo/Vibecoding-Dulce/processes` | All execution flows |
-| `gitnexus://repo/Vibecoding-Dulce/process/{name}` | Step-by-step execution trace |
+| `gitnexus://repo/curza-stic-main/context` | Codebase overview, check index freshness |
+| `gitnexus://repo/curza-stic-main/clusters` | All functional areas |
+| `gitnexus://repo/curza-stic-main/processes` | All execution flows |
+| `gitnexus://repo/curza-stic-main/process/{name}` | Step-by-step execution trace |
 
 ## CLI
 

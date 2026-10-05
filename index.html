@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#070e13">
 <title>Simuladores TIC · Seminario de Tecnología e Innovación</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"></noscript>
 <style>
   /* ============================================================
      PORTAL DE SIMULADORES EDUCATIVOS TIC - CURZA / UNCo
@@ -48,7 +49,7 @@
     --radius-md: 14px;
     --radius-lg: 20px;
     --radius-full: 9999px;
-    --header-h: 92px;
+    --header-h: 74px;
   }
 
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -72,26 +73,96 @@
       linear-gradient(180deg, #060b10 0%, #09131c 100%);
     background-attachment: fixed;
     color: var(--ink);
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     overflow-x: hidden;
   }
 
   a { color: inherit; text-decoration: none; }
   button { font-family: inherit; }
 
+  
+  /* ---------- ICONOS VECTORIALES SVG (LUCIDE) ---------- */
+  .ico-svg {
+    display: inline-block;
+    vertical-align: middle;
+    width: 1.15em;
+    height: 1.15em;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+
+  .brand-ico .ico-svg {
+    width: 22px;
+    height: 22px;
+    stroke: var(--c-dron);
+    filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.45));
+  }
+
+  .search-ico .ico-svg {
+    width: 14px;
+    height: 14px;
+    stroke: var(--dim);
+  }
+
+  .btn-dock .ico-svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .pill .ico-svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .sec-title-group h2 .ico-svg {
+    width: 21px;
+    height: 21px;
+    stroke: var(--c, var(--c-dron));
+  }
+
+  .card-top .card-ico {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: var(--c, var(--c-dron));
+    transition: transform 0.2s, background 0.2s, border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .card-sim:hover .card-ico {
+    transform: scale(1.08);
+    background: rgba(56, 189, 248, 0.1);
+    border-color: var(--c, var(--c-dron));
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+  }
+
+  .card-top .card-ico .ico-svg {
+    width: 19px;
+    height: 19px;
+    stroke: currentColor;
+  }
+
   /* ---------- TOP NAVBAR MINIMALISTA ---------- */
   .app-header {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(6, 11, 16, 0.92);
+    background: rgba(6, 11, 16, 0.94);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--line);
-    padding: 10px 18px 8px;
+    padding: 6px 18px 6px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
   }
 
   .nav-bar {
@@ -154,8 +225,8 @@
     background: rgba(14, 25, 36, 0.65);
     border: 1px solid var(--line);
     border-radius: var(--radius-full);
-    padding: 7px 14px 7px 36px;
-    font-size: 13px;
+    padding: 5px 14px 5px 34px;
+    font-size: 12.5px;
     color: var(--ink);
     outline: none;
     transition: all 0.2s ease;
@@ -173,14 +244,14 @@
     top: 50%;
     transform: translateY(-50%);
     color: var(--dim);
-    font-size: 14px;
+    font-size: 13px;
     pointer-events: none;
   }
 
   .nav-actions {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     flex-shrink: 0;
   }
 
@@ -188,14 +259,14 @@
     background: rgba(14, 25, 36, 0.6);
     border: 1px solid var(--line);
     color: var(--muted);
-    font-size: 11.5px;
+    font-size: 11px;
     font-weight: 600;
-    padding: 6px 12px;
+    padding: 4px 10px;
     border-radius: var(--radius-full);
     cursor: pointer;
     display: inline-flex;
     align-items: center;
-    gap: 5px;
+    gap: 4px;
     transition: all 0.18s ease;
   }
 
@@ -211,7 +282,7 @@
     width: 100%;
     margin: 0 auto;
     display: flex;
-    gap: 6px;
+    gap: 5px;
     overflow-x: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -222,18 +293,18 @@
 
   .pill {
     flex-shrink: 0;
-    font-size: 11px;
+    font-size: 10.5px;
     font-weight: 600;
     color: var(--muted);
-    background: rgba(14, 25, 36, 0.45);
+    background: rgba(14, 25, 36, 0.5);
     border: 1px solid var(--line);
-    padding: 5px 11px;
+    padding: 3px 9px;
     border-radius: var(--radius-full);
     cursor: pointer;
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    transition: all 0.18s ease;
+    gap: 4px;
+    transition: all 0.16s ease;
     user-select: none;
   }
 
@@ -248,23 +319,25 @@
   .main-wrap {
     max-width: 1320px;
     margin: 0 auto;
-    padding: 16px 20px 48px;
+    padding: 0 16px 16px;
   }
 
-  /* ---------- SECCIÓN ACORDEÓN / CARRUSEL (ENCUADRE COMPLETO 100% VIEWPORT) ---------- */
+  /* ---------- SECCIÓN ADAPTATIVA (100% VIEWPORT EXACTO) ---------- */
   .catalog-sec {
     scroll-snap-align: start;
     scroll-snap-stop: always;
-    min-height: calc(100dvh - var(--header-h) - 24px);
+    height: calc(100dvh - var(--header-h) - 16px);
+    max-height: calc(100dvh - var(--header-h) - 16px);
+    min-height: 280px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-bottom: 24px;
-    background: rgba(10, 19, 28, 0.55);
+    margin: 8px 0;
+    background: rgba(10, 19, 28, 0.6);
     border: 1px solid var(--line);
     border-radius: var(--radius-lg);
-    padding: 24px 28px;
-    backdrop-filter: blur(12px);
+    padding: 16px 22px;
+    backdrop-filter: blur(14px);
     transition: border-color 0.25s, box-shadow 0.25s;
     position: relative;
     overflow: hidden;
@@ -276,13 +349,13 @@
     min-height: unset !important;
     max-height: unset !important;
     scroll-snap-align: none;
-    padding: 18px 24px;
+    padding: 14px 20px;
+    margin: 6px 0;
   }
 
-  @media (max-height: 580px) {
+  @media (max-height: 520px) {
     .catalog-sec {
-      min-height: unset;
-      height: auto;
+      padding: 12px 18px;
     }
   }
 
@@ -408,10 +481,10 @@
   }
 
   .sec-desc {
-    margin: 8px 0 16px;
-    font-size: 13.5px;
+    margin: 2px 0 8px;
+    font-size: 12.5px;
     color: var(--muted);
-    line-height: 1.5;
+    line-height: 1.35;
   }
 
   /* ---------- CARRUSEL TRACK (HORIZONTAL SCROLL) ---------- */
@@ -437,11 +510,11 @@
 
   .carousel-track {
     display: flex;
-    gap: 16px;
+    gap: 14px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-    padding: 10px 48px 14px 4px;
+    padding: 6px 48px 10px 2px;
     cursor: grab;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -456,9 +529,9 @@
     display: none;
   }
 
-  /* ---------- TARJETA DE SIMULADOR ---------- */
+  /* ---------- TARJETA DE SIMULADOR COMPACTA Y PRO ---------- */
   .card-sim {
-    flex: 0 0 292px;
+    flex: 0 0 270px;
     scroll-snap-align: start;
     position: relative;
     display: flex;
@@ -466,9 +539,9 @@
     background: var(--bg-card);
     border: 1px solid var(--line);
     border-radius: var(--radius-md);
-    padding: 18px 18px 16px;
-    min-height: 168px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    padding: 13px 15px 11px;
+    min-height: 134px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
     transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
                 border-color 0.2s ease, 
                 background 0.2s ease, 
@@ -485,53 +558,64 @@
   }
 
   .card-sim:hover, .card-sim:focus-visible {
-    transform: translateY(-4px) scale(1.015);
+    transform: translateY(-3px) scale(1.01);
     border-color: var(--c, var(--c-dron));
     background: var(--bg-card-hover);
-    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4), 0 0 18px rgba(56, 189, 248, 0.12);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35), 0 0 16px rgba(56, 189, 248, 0.12);
   }
 
   .card-top {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
   }
 
   .card-ico {
-    font-size: 28px;
+    font-size: 22px;
     line-height: 1;
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
   }
 
+  /* Badge de tarjeta (números y siglas como QGIS, CAD, GEN) */
   .card-num {
-    width: 28px;
-    height: 28px;
-    border-radius: 8px;
-    display: grid;
-    place-items: center;
-    font-size: 13px;
+    min-width: 26px;
+    height: 22px;
+    padding: 0 7px;
+    border-radius: var(--radius-full);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
     font-weight: 800;
-    background: rgba(0, 0, 0, 0.45);
+    letter-spacing: 0.5px;
+    background: rgba(0, 0, 0, 0.5);
     color: var(--c, var(--c-dron));
     border: 1px solid var(--c, var(--c-dron));
+    white-space: nowrap;
+    box-sizing: border-box;
   }
 
   .card-title {
     font-family: 'Outfit', sans-serif;
-    font-size: 16px;
+    font-size: 14.5px;
     font-weight: 700;
     color: var(--ink);
-    line-height: 1.3;
-    margin-bottom: 8px;
+    line-height: 1.25;
+    margin-bottom: 4px;
   }
 
   .card-desc {
-    font-size: 12.8px;
+    font-size: 11.5px;
     color: var(--muted);
-    line-height: 1.48;
-    margin-bottom: 14px;
+    line-height: 1.36;
+    margin-bottom: 8px;
     flex-grow: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .card-desc b {
@@ -543,12 +627,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: 10px;
+    padding-top: 7px;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
   }
 
   .card-tag {
-    font-size: 10.5px;
+    font-size: 9.5px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -556,7 +640,7 @@
   }
 
   .card-go {
-    font-size: 12.5px;
+    font-size: 11px;
     font-weight: 700;
     color: var(--c, var(--ink));
     display: inline-flex;
@@ -613,6 +697,263 @@
     .catalog-sec { padding: 16px 14px 14px; }
     .sec-controls .arrow-btn { display: none; }
   }
+
+  /* ============================================================
+     VISOR ESPECIAL INTEGRADO (TUTORIALES, GUÍAS Y LABORATORIOS)
+     ============================================================ */
+  .curza-viewer-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.28s;
+  }
+
+  .curza-viewer-overlay.is-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .curza-viewer-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(3, 7, 12, 0.85);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+  }
+
+  .curza-viewer-window {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    width: min(1380px, 95vw);
+    height: min(88vh, 880px);
+    background: #0b141f;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 18px;
+    box-shadow: 
+      0 28px 70px -10px rgba(0, 0, 0, 0.9),
+      0 0 35px rgba(56, 189, 248, 0.12),
+      0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+    overflow: hidden;
+    transform: scale(0.96) translateY(8px);
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), width 0.22s ease, height 0.22s ease, border-radius 0.22s ease;
+  }
+
+  .curza-viewer-overlay.is-active .curza-viewer-window {
+    transform: scale(1) translateY(0);
+  }
+
+  /* Modo Pantalla Completa (Fullscreen / Maximizado) */
+  .curza-viewer-window.is-maximized,
+  .curza-viewer-overlay:fullscreen .curza-viewer-window {
+    width: 100vw !important;
+    height: 100dvh !important;
+    max-width: 100vw !important;
+    max-height: 100dvh !important;
+    border-radius: 0 !important;
+    border: none !important;
+    margin: 0 !important;
+  }
+
+  .curza-viewer-overlay.is-fullscreen-mode {
+    padding: 0 !important;
+  }
+
+  /* Header del Visor */
+  .curza-viewer-header {
+    height: 56px;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 18px;
+    background: linear-gradient(90deg, #111c2a, #0c1622);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    gap: 12px;
+  }
+
+  .curza-viewer-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .curza-viewer-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+    background: rgba(56, 189, 248, 0.12);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    display: grid;
+    place-items: center;
+    color: var(--c-dron);
+    flex-shrink: 0;
+  }
+
+  .curza-viewer-icon .ico-svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .curza-viewer-titles {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .curza-viewer-badge {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 9999px;
+    background: rgba(99, 102, 241, 0.16);
+    color: #a5b4fc;
+    border: 1px solid rgba(99, 102, 241, 0.35);
+    white-space: nowrap;
+  }
+
+  .curza-viewer-title {
+    margin: 0;
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: #f1f5f9;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Botones de acción del header */
+  .curza-viewer-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .viewer-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 32px;
+    padding: 0 11px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    color: #cbd5e1;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    text-decoration: none;
+  }
+
+  .viewer-btn:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.22);
+    color: #ffffff;
+  }
+
+  .viewer-btn .ico-svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .viewer-btn-fullscreen:hover {
+    background: rgba(56, 189, 248, 0.15);
+    border-color: rgba(56, 189, 248, 0.35);
+    color: var(--c-dron);
+  }
+
+  .viewer-btn-close {
+    padding: 0 9px;
+    background: rgba(244, 63, 94, 0.1);
+    border-color: rgba(244, 63, 94, 0.25);
+    color: #fb7185;
+  }
+
+  .viewer-btn-close:hover {
+    background: rgba(244, 63, 94, 0.25);
+    border-color: rgba(244, 63, 94, 0.45);
+    color: #ffffff;
+  }
+
+  /* Body & Iframe */
+  .curza-viewer-body {
+    position: relative;
+    flex: 1;
+    background: #080f16;
+    overflow: hidden;
+  }
+
+  .curza-viewer-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: transparent;
+    display: block;
+  }
+
+  .curza-viewer-loader {
+    position: absolute;
+    inset: 0;
+    background: #080f16;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    color: #94a3b8;
+    font-size: 0.88rem;
+    z-index: 2;
+    transition: opacity 0.22s ease;
+  }
+
+  .curza-viewer-loader.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .viewer-spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid rgba(56, 189, 248, 0.15);
+    border-top-color: var(--c-dron);
+    border-radius: 50%;
+    animation: viewerSpin 0.75s linear infinite;
+  }
+
+  @keyframes viewerSpin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* Tarjetas con Visor Integrado */
+  .card-sim[data-viewer="true"] .card-go {
+    background: rgba(99, 102, 241, 0.16);
+    color: #a5b4fc;
+    border-color: rgba(99, 102, 241, 0.32);
+    font-weight: 700;
+  }
+
+  .card-sim[data-viewer="true"]:hover .card-go {
+    background: #6366f1;
+    color: #ffffff;
+  }
+
 </style>
 </head>
 <body>
@@ -621,37 +962,121 @@
 <header class="app-header">
   <div class="nav-bar">
     <div class="brand">
-      <span class="brand-ico">🛰️</span>
+      <span class="brand-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="m13.5 6.5-3.148-3.148a1.205 1.205 0 0 0-1.704 0L6.352 5.648a1.205 1.205 0 0 0 0 1.704L9.5 10.5" />
+  <path d="M16.5 7.5 19 5" />
+  <path d="m17.5 10.5 3.148 3.148a1.205 1.205 0 0 1 0 1.704l-2.296 2.296a1.205 1.205 0 0 1-1.704 0L13.5 14.5" />
+  <path d="M9 21a6 6 0 0 0-6-6" />
+  <path d="M9.352 10.648a1.205 1.205 0 0 0 0 1.704l2.296 2.296a1.205 1.205 0 0 0 1.704 0l4.296-4.296a1.205 1.205 0 0 0 0-1.704l-2.296-2.296a1.205 1.205 0 0 0-1.704 0z" />
+</svg></span>
       <h1 class="brand-title">Simuladores TIC <span class="brand-pill">CURZA · UNCo</span></h1>
     </div>
 
     <div class="search-box">
-      <span class="search-ico">🔍</span>
+      <span class="search-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="m21 21-4.34-4.34" />
+  <circle cx="11" cy="11" r="8" />
+</svg></span>
       <input type="text" id="sim-search" placeholder="Buscar simulador (dron, sql, arduino, satélite...)" autocomplete="off">
     </div>
 
     <div class="nav-actions">
-      <button class="btn-dock" id="btn-toggle-all">📁 Contraer</button>
-      <a class="btn-dock" href="index-codex.html" title="Índice alternativo Codex">📖 Codex</a>
+      <button class="btn-dock" id="btn-toggle-all"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
+</svg> <span class="btn-text">Contraer</span></button>
+      <a class="btn-dock" href="index-codex.html" data-viewer="true" title="Índice alternativo Codex"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 5v16" />
+  <path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z" />
+</svg> <span>Codex</span></a>
     </div>
   </div>
 
   <div class="pills-bar" id="pills-bar">
-    <div class="pill active" data-target="all">🌟 Todos</div>
-    <div class="pill" data-target="sec-dron" style="--accent-color: var(--c-dron)">🚁 Drones</div>
-    <div class="pill" data-target="sec-robo" style="--accent-color: var(--c-robo)">🦾 Robótica</div>
-    <div class="pill" data-target="sec-iot" style="--accent-color: var(--c-iot)">🔌 IoT</div>
-    <div class="pill" data-target="sec-meteo" style="--accent-color: var(--c-meteo)">🌦️ Meteo</div>
-    <div class="pill" data-target="sec-ofi" style="--accent-color: var(--c-ofi)">🖥️ Ofimática</div>
-    <div class="pill" data-target="sec-ref" style="--accent-color: var(--c-ref)">📐 Despieces</div>
-    <div class="pill" data-target="sec-lab" style="--accent-color: var(--c-lab)">🔬 SIG / CAD</div>
-    <div class="pill" data-target="sec-bi" style="--accent-color: var(--c-bi)">📊 BI</div>
-    <div class="pill" data-target="sec-segu" style="--accent-color: var(--c-segu)">🔐 Seguridad</div>
-    <div class="pill" data-target="sec-bd" style="--accent-color: var(--c-bd)">🗄️ SQL</div>
-    <div class="pill" data-target="sec-ia" style="--accent-color: var(--c-ia)">🤖 IA</div>
-    <div class="pill" data-target="sec-moodle" style="--accent-color: var(--c-moodle)">🎓 Moodle</div>
-    <div class="pill" data-target="sec-eje" style="--accent-color: var(--c-eje)">📚 Guías</div>
-    <div class="pill" data-target="sec-alt" style="--accent-color: var(--c-alt)">🧪 Prototipos</div>
+    <div class="pill active" data-target="all"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
+  <path d="M20 2v4" />
+  <path d="M22 4h-4" />
+  <circle cx="4" cy="20" r="2" />
+</svg> <span>Todos</span></div>
+    <div class="pill" data-target="sec-dron" style="--accent-color: var(--c-dron)"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <polygon points="3 11 22 2 13 21 11 13 3 11" />
+</svg> <span>Drones</span></div>
+    <div class="pill" data-target="sec-robo" style="--accent-color: var(--c-robo)"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 8V4H8" />
+  <rect width="16" height="12" x="4" y="8" rx="2" />
+  <path d="M2 14h2" />
+  <path d="M20 14h2" />
+  <path d="M15 13v2" />
+  <path d="M9 13v2" />
+</svg> <span>Robótica</span></div>
+    <div class="pill" data-target="sec-iot" style="--accent-color: var(--c-iot)"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M15.914 4a1.5 1.5 0 00-2.474-1.561l-9 9A1.5 1.5 0 005.5 14h4.002a.5.5 0 01.471.666L8.086 20a1.5 1.5 0 002.475 1.56l9-9A1.5 1.5 0 0018.5 10h-3.997a.5.5 0 01-.472-.667z" />
+</svg> <span>IoT</span></div>
+    <div class="pill" data-target="sec-meteo" style="--accent-color: var(--c-meteo)"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 2v2" />
+  <path d="m4.93 4.93 1.41 1.41" />
+  <path d="M20 12h2" />
+  <path d="m19.07 4.93-1.41 1.41" />
+  <path d="M15.947 12.65a4 4 0 0 0-5.925-4.128" />
+  <path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z" />
+</svg> <span>Meteo</span></div>
+    <div class="pill" data-target="sec-ofi" style="--accent-color: var(--c-ofi)"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <rect width="20" height="14" x="2" y="3" rx="2" />
+  <line x1="8" x2="16" y1="21" y2="21" />
+  <line x1="12" x2="12" y1="17" y2="21" />
+</svg> <span>Ofimática</span></div>
+    <div class="pill" data-target="sec-ref" style="--accent-color: var(--c-ref)"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z" />
+  <path d="m14.5 12.5 2-2" />
+  <path d="m11.5 9.5 2-2" />
+  <path d="m8.5 6.5 2-2" />
+  <path d="m17.5 15.5 2-2" />
+</svg> <span>Despieces</span></div>
+    <div class="pill" data-target="sec-lab" style="--accent-color: var(--c-lab)"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <circle cx="12" cy="10" r="3" />
+</svg> <span>SIG / CAD</span></div>
+    <div class="pill" data-target="sec-bi" style="--accent-color: var(--c-bi)"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3 3v16a2 2 0 0 0 2 2h16" />
+  <path d="M18 17V9" />
+  <path d="M13 17V5" />
+  <path d="M8 17v-3" />
+</svg> <span>BI</span></div>
+    <div class="pill" data-target="sec-segu" style="--accent-color: var(--c-segu)"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+  <path d="m9 12 2 2 4-4" />
+</svg> <span>Seguridad</span></div>
+    <div class="pill" data-target="sec-bd" style="--accent-color: var(--c-bd)"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <ellipse cx="12" cy="5" rx="9" ry="3" />
+  <path d="M3 5V19A9 3 0 0 0 21 19V5" />
+  <path d="M3 12A9 3 0 0 0 21 12" />
+</svg> <span>SQL</span></div>
+    <div class="pill" data-target="sec-ia" style="--accent-color: var(--c-ia)"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 18V5" />
+  <path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4" />
+  <path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5" />
+  <path d="M17.997 5.125a4 4 0 0 1 2.526 5.77" />
+  <path d="M18 18a4 4 0 0 0 2-7.464" />
+  <path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517" />
+  <path d="M6 18a4 4 0 0 1-2-7.464" />
+  <path d="M6.003 5.125a4 4 0 0 0-2.526 5.77" />
+</svg> <span>IA</span></div>
+    <div class="pill" data-target="sec-moodle" style="--accent-color: var(--c-moodle)"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" />
+  <path d="M22 10v6" />
+  <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
+</svg> <span>Moodle</span></div>
+    <div class="pill" data-target="sec-eje" style="--accent-color: var(--c-eje)"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="m16 6 4 14" />
+  <path d="M12 6v14" />
+  <path d="M8 8v12" />
+  <path d="M4 4v16" />
+</svg> <span>Guías</span></div>
+    <div class="pill" data-target="sec-alt" style="--accent-color: var(--c-alt)"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2" />
+  <path d="M6.453 15h11.094" />
+  <path d="M8.5 2h7" />
+</svg> <span>Prototipos</span></div>
   </div>
 </header>
 
@@ -662,7 +1087,9 @@
   <section class="catalog-sec sec-dron" id="sec-dron">
     <div class="sec-header">
       <div class="sec-title-group">
-        <h2>🚁 Simulador de Dron</h2>
+        <h2><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <polygon points="3 11 22 2 13 21 11 13 3 11" />
+</svg> Simulador de Dron</h2>
         <span class="tag-cat">Ruta progresiva</span>
         <span class="tag-count">7 simuladores</span>
       </div>
@@ -678,43 +1105,75 @@
       <div class="carousel-wrapper">
         <div class="carousel-track">
           <a class="card-sim" href="simuladores/dron/modo-libre.html">
-            <div class="card-top"><span class="card-ico">🕹️</span><span class="card-num">0</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <line x1="6" x2="10" y1="11" y2="11" />
+  <line x1="8" x2="8" y1="9" y2="13" />
+  <line x1="15" x2="15.01" y1="12" y2="12" />
+  <line x1="18" x2="18.01" y1="10" y2="10" />
+  <path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z" />
+</svg></span><span class="card-num">0</span></div>
             <div class="card-title">Modo libre · Cabina FPV</div>
             <div class="card-desc">Pilotá en primera persona con palancas virtuales o teclado. <b>4 circuitos de aros</b>, desde práctica libre hasta slalom vertical con récord propio.</div>
             <div class="card-foot"><span class="card-tag">FPV 3D Puro</span><span class="card-go">Abrir →</span></div>
           </a>
           <a class="card-sim" href="simuladores/dron/etapa-1.html">
-            <div class="card-top"><span class="card-ico">🗺️</span><span class="card-num">1</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" />
+  <path d="M15 5.764v15" />
+  <path d="M9 3.236v15" />
+</svg></span><span class="card-num">1</span></div>
             <div class="card-title">Planificación de ruta</div>
             <div class="card-desc">Marcá puntos clave en el mapa y optimizá la trayectoria. <b>3 niveles</b> con alcance limitado de batería y regreso al punto de origen.</div>
             <div class="card-foot"><span class="card-tag">Rutas GPS</span><span class="card-go">Abrir →</span></div>
           </a>
           <a class="card-sim" href="simuladores/dron/etapa-2.html">
-            <div class="card-top"><span class="card-ico">🧩</span><span class="card-num">2</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M15.39 4.39a1 1 0 0 0 1.68-.474 2.5 2.5 0 1 1 3.014 3.015 1 1 0 0 0-.474 1.68l1.683 1.682a2.414 2.414 0 0 1 0 3.414L19.61 15.39a1 1 0 0 1-1.68-.474 2.5 2.5 0 1 0-3.014 3.015 1 1 0 0 1 .474 1.68l-1.683 1.682a2.414 2.414 0 0 1-3.414 0L8.61 19.61a1 1 0 0 0-1.68.474 2.5 2.5 0 1 1-3.014-3.015 1 1 0 0 0 .474-1.68l-1.683-1.682a2.414 2.414 0 0 1 0-3.414L4.39 8.61a1 1 0 0 1 1.68.474 2.5 2.5 0 1 0 3.014-3.015 1 1 0 0 1-.474-1.68l1.683-1.682a2.414 2.414 0 0 1 3.414 0z" />
+</svg></span><span class="card-num">2</span></div>
             <div class="card-title">Misiones con acciones</div>
             <div class="card-desc">Programá mediante bloques lógicos: despegue, toma de muestras fotográficas, recogida y liberación de paquetes en orden estricto.</div>
             <div class="card-foot"><span class="card-tag">Bloques</span><span class="card-go">Abrir →</span></div>
           </a>
           <a class="card-sim" href="simuladores/dron/etapa-3.html">
-            <div class="card-top"><span class="card-ico">🔋</span><span class="card-num">3</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="m11 7-3 5h4l-3 5" />
+  <path d="M14.856 6H16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.935" />
+  <path d="M22 14v-4" />
+  <path d="M5.14 18H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h2.936" />
+</svg></span><span class="card-num">3</span></div>
             <div class="card-title">Gestión de recursos</div>
             <div class="card-desc">Cálculo dinámico de descarga según distancia, velocidad del viento y peso de la carga. <b>3 misiones</b> con telemetría en tiempo real.</div>
             <div class="card-foot"><span class="card-tag">Telemetría</span><span class="card-go">Abrir →</span></div>
           </a>
           <a class="card-sim" href="simuladores/dron/etapa-4.html">
-            <div class="card-top"><span class="card-ico">🌩️</span><span class="card-num">4</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M6 16.326A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 .5 8.973" />
+  <path d="m13 12-3 5h4l-3 5" />
+</svg></span><span class="card-num">4</span></div>
             <div class="card-title">Condiciones meteorológicas</div>
             <div class="card-desc">Ventana operativa según ráfagas de viento y frentes de tormenta. Tomá decisiones críticas de abortar o completar la misión a tiempo.</div>
             <div class="card-foot"><span class="card-tag">Seguridad</span><span class="card-go">Abrir →</span></div>
           </a>
           <a class="card-sim" href="simuladores/dron/etapa-5.html">
-            <div class="card-top"><span class="card-ico">🧠</span><span class="card-num">5</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 18V5" />
+  <path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4" />
+  <path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5" />
+  <path d="M17.997 5.125a4 4 0 0 1 2.526 5.77" />
+  <path d="M18 18a4 4 0 0 0 2-7.464" />
+  <path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517" />
+  <path d="M6 18a4 4 0 0 1-2-7.464" />
+  <path d="M6.003 5.125a4 4 0 0 0-2.526 5.77" />
+</svg></span><span class="card-num">5</span></div>
             <div class="card-title">Optimización matemática</div>
             <div class="card-desc">Resolución del problema del viajante en parcelas agrícolas: descubrí la ruta de menor gasto energético y ganá estrellas de eficiencia.</div>
             <div class="card-foot"><span class="card-tag">Algoritmos</span><span class="card-go">Abrir →</span></div>
           </a>
           <a class="card-sim" href="simuladores/dron/etapa-6.html">
-            <div class="card-top"><span class="card-ico">⌨️</span><span class="card-num">6</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="m16 18 6-6-6-6" />
+  <path d="m8 6-6 6 6 6" />
+</svg></span><span class="card-num">6</span></div>
             <div class="card-title">Del bloque al código</div>
             <div class="card-desc">Escribí scripts textuales de vuelo con parámetros numéricos, bucles <code>repetir { }</code> y desniveles de cota altimétrica en 3 dimensiones.</div>
             <div class="card-foot"><span class="card-tag">Scripting</span><span class="card-go">Abrir →</span></div>
@@ -728,7 +1187,14 @@
   <section class="catalog-sec sec-robo" id="sec-robo">
     <div class="sec-header">
       <div class="sec-title-group">
-        <h2>🦾 Robótica</h2>
+        <h2><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 8V4H8" />
+  <rect width="16" height="12" x="4" y="8" rx="2" />
+  <path d="M2 14h2" />
+  <path d="M20 14h2" />
+  <path d="M15 13v2" />
+  <path d="M9 13v2" />
+</svg> Robótica</h2>
         <span class="tag-cat">Cinemática y Automatización</span>
         <span class="tag-count">1 simulador</span>
       </div>
@@ -743,7 +1209,14 @@
       <div class="carousel-wrapper">
         <div class="carousel-track">
           <a class="card-sim" href="simuladores/robotica/brazo-bloques.html">
-            <div class="card-top"><span class="card-ico">🦾</span><span class="card-num">3D</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 8V4H8" />
+  <rect width="16" height="12" x="4" y="8" rx="2" />
+  <path d="M2 14h2" />
+  <path d="M20 14h2" />
+  <path d="M15 13v2" />
+  <path d="M9 13v2" />
+</svg></span><span class="card-num">3D</span></div>
             <div class="card-title">Brazo robótico articulado</div>
             <div class="card-desc">Programá un brazo robótico articulado en 3D con bloques visuales: trasplante de plantines y clasificación automática de frutos por colorimetría.</div>
             <div class="card-foot"><span class="card-tag">Cinemática 3D</span><span class="card-go">Abrir →</span></div>
@@ -757,7 +1230,9 @@
   <section class="catalog-sec sec-iot" id="sec-iot">
     <div class="sec-header">
       <div class="sec-title-group">
-        <h2>🔌 Arduino / IoT</h2>
+        <h2><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M15.914 4a1.5 1.5 0 00-2.474-1.561l-9 9A1.5 1.5 0 005.5 14h4.002a.5.5 0 01.471.666L8.086 20a1.5 1.5 0 002.475 1.56l9-9A1.5 1.5 0 0018.5 10h-3.997a.5.5 0 01-.472-.667z" />
+</svg> Arduino / IoT</h2>
         <span class="tag-cat">Sistemas Embebidos</span>
         <span class="tag-count">4 simuladores</span>
       </div>
@@ -772,25 +1247,36 @@
       <div class="carousel-wrapper">
         <div class="carousel-track">
           <a class="card-sim" href="simuladores/iot/arduino-banco.html">
-            <div class="card-top"><span class="card-ico">🔌</span><span class="card-num">1</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M15.914 4a1.5 1.5 0 00-2.474-1.561l-9 9A1.5 1.5 0 005.5 14h4.002a.5.5 0 01.471.666L8.086 20a1.5 1.5 0 002.475 1.56l9-9A1.5 1.5 0 0018.5 10h-3.997a.5.5 0 01-.472-.667z" />
+</svg></span><span class="card-num">1</span></div>
             <div class="card-title">Banco Arduino / IoT</div>
             <div class="card-desc">Simulador interactivo con pulsadores, potenciómetros, LDR, LEDs y servos. Genera en vivo el sketch C++ real para compilar en Arduino IDE.</div>
             <div class="card-foot"><span class="card-tag">Hardware C++</span><span class="card-go">Abrir →</span></div>
           </a>
           <a class="card-sim" href="simuladores/iot/vivero.html">
-            <div class="card-top"><span class="card-ico">🌱</span><span class="card-num">2</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M14 9.536V7a4 4 0 0 1 4-4h1.5a.5.5 0 0 1 .5.5V5a4 4 0 0 1-4 4 4 4 0 0 0-4 4c0 2 1 3 1 5a5 5 0 0 1-1 3" />
+  <path d="M4 9a5 5 0 0 1 8 4 5 5 0 0 1-8-4" />
+  <path d="M5 21h14" />
+</svg></span><span class="card-num">2</span></div>
             <div class="card-title">Vivero inteligente</div>
             <div class="card-desc">Sistema de control de riego para 3 zonas independientes en base a sensores higrométricos de suelo, nivel de reserva y reloj horario.</div>
             <div class="card-foot"><span class="card-tag">Cultivo IoT</span><span class="card-go">Abrir →</span></div>
           </a>
-          <a class="card-sim" href="simuladores/iot/vivero-automatizado.html">
-            <div class="card-top"><span class="card-ico">💧</span><span class="card-num">3</span></div>
+          <a class="card-sim" href="simuladores/iot/vivero-automatizado.html" data-viewer="true" title="Abrir en Visor Integrado">
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z" />
+  <path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97" />
+</svg></span><span class="card-num">3</span></div>
             <div class="card-title">Vivero automatizado integral</div>
             <div class="card-desc">Automatización avanzada de microclima: control de electroválvulas, dosificación de nutrientes, nebulizadores y ventilación forzada.</div>
             <div class="card-foot"><span class="card-tag">Invernadero</span><span class="card-go">Abrir →</span></div>
           </a>
           <a class="card-sim" href="simuladores/iot/arduino-despiece.html">
-            <div class="card-top"><span class="card-ico">🔧</span><span class="card-num">4</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z" />
+</svg></span><span class="card-num">4</span></div>
             <div class="card-title">Despiece del sistema Arduino</div>
             <div class="card-desc">Exploración anatómica en capas: microcontrolador ATmega, reguladores de tensión, buses de comunicación I2C/SPI y pines GPIO.</div>
             <div class="card-foot"><span class="card-tag">Anatomía HW</span><span class="card-go">Abrir →</span></div>
@@ -804,7 +1290,14 @@
   <section class="catalog-sec sec-meteo" id="sec-meteo">
     <div class="sec-header">
       <div class="sec-title-group">
-        <h2>🌦️ Meteorología</h2>
+        <h2><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 2v2" />
+  <path d="m4.93 4.93 1.41 1.41" />
+  <path d="M20 12h2" />
+  <path d="m19.07 4.93-1.41 1.41" />
+  <path d="M15.947 12.65a4 4 0 0 0-5.925-4.128" />
+  <path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z" />
+</svg> Meteorología</h2>
         <span class="tag-cat">Monitoreo Ambiental</span>
         <span class="tag-count">3 simuladores</span>
       </div>
@@ -819,19 +1312,32 @@
       <div class="carousel-wrapper">
         <div class="carousel-track">
           <a class="card-sim" href="simuladores/meteo/central-meteo.html">
-            <div class="card-top"><span class="card-ico">🌦️</span><span class="card-num">1</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 2v2" />
+  <path d="m4.93 4.93 1.41 1.41" />
+  <path d="M20 12h2" />
+  <path d="m19.07 4.93-1.41 1.41" />
+  <path d="M15.947 12.65a4 4 0 0 0-5.925-4.128" />
+  <path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z" />
+</svg></span><span class="card-num">1</span></div>
             <div class="card-title">Central meteorológica</div>
             <div class="card-desc">Registro en vivo de temperatura, humedad relativa, viento, pluviometría y presión barométrica con curvas temporales y exportación a CSV.</div>
             <div class="card-foot"><span class="card-tag">Estación Activa</span><span class="card-go">Abrir →</span></div>
           </a>
-          <a class="card-sim" href="simuladores/meteo/estacion-meteorologica.html">
-            <div class="card-top"><span class="card-ico">🌡️</span><span class="card-num">2</span></div>
+          <a class="card-sim" href="simuladores/meteo/estacion-meteorologica.html" data-viewer="true" title="Abrir en Visor Integrado">
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z" />
+</svg></span><span class="card-num">2</span></div>
             <div class="card-title">Despiece estación meteorológica</div>
             <div class="card-desc">Análisis de instrumentos de precisión: abrigo meteorológico, termohigrómetro digital, anemómetro de cazoletas y barómetro piezoeléctrico.</div>
             <div class="card-foot"><span class="card-tag">Instrumentación</span><span class="card-go">Abrir →</span></div>
           </a>
-          <a class="card-sim" href="simuladores/meteo/estacion-meteorologica-gemini.html">
-            <div class="card-top"><span class="card-ico">🌐</span><span class="card-num">3</span></div>
+          <a class="card-sim" href="simuladores/meteo/estacion-meteorologica-gemini.html" data-viewer="true" title="Abrir en Visor Integrado">
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="10" />
+  <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+  <path d="M2 12h20" />
+</svg></span><span class="card-num">3</span></div>
             <div class="card-title">Estación inmersiva 3D</div>
             <div class="card-desc">Prototipo volumétrico con radar animado, vientos cruzados y visualización de frentes térmicos en un entorno 3D navegable.</div>
             <div class="card-foot"><span class="card-tag">Visualización 3D</span><span class="card-go">Abrir →</span></div>
@@ -845,7 +1351,13 @@
   <section class="catalog-sec sec-ofi" id="sec-ofi">
     <div class="sec-header">
       <div class="sec-title-group">
-        <h2>🖥️ Suite Ofimática</h2>
+        <h2><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" />
+  <path d="M14 2v5a1 1 0 0 0 1 1h5" />
+  <path d="M10 9H8" />
+  <path d="M16 13H8" />
+  <path d="M16 17H8" />
+</svg> Suite Ofimática</h2>
         <span class="tag-cat">Productividad Técnica</span>
         <span class="tag-count">3 simuladores</span>
       </div>
@@ -860,19 +1372,33 @@
       <div class="carousel-wrapper">
         <div class="carousel-track">
           <a class="card-sim" href="simuladores/ofimatica/writer-maqueta.html">
-            <div class="card-top"><span class="card-ico">📝</span><span class="card-num">1</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" />
+  <path d="M14 2v5a1 1 0 0 0 1 1h5" />
+  <path d="M10 9H8" />
+  <path d="M16 13H8" />
+  <path d="M16 17H8" />
+</svg></span><span class="card-num">1</span></div>
             <div class="card-title">Procesador de textos técnico</div>
             <div class="card-desc">Maquetación formal de informes periciales y tesis: aplicación de jerarquía de títulos, sumarios automáticos y numeración por secciones.</div>
             <div class="card-foot"><span class="card-tag">Tipografía</span><span class="card-go">Abrir →</span></div>
           </a>
           <a class="card-sim" href="simuladores/ofimatica/calc-1-formulas.html">
-            <div class="card-top"><span class="card-ico">📊</span><span class="card-num">2</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 3v18" />
+  <rect width="18" height="18" x="3" y="3" rx="2" />
+  <path d="M3 9h18" />
+  <path d="M3 15h18" />
+</svg></span><span class="card-num">2</span></div>
             <div class="card-title">Planilla · Fundamentos y fórmulas</div>
             <div class="card-desc">13 misiones evolutivas: referencias relativas y absolutas ($), funciones lógicas SI/Y/O, operadores de fecha y búsquedas complejas con BUSCARV.</div>
             <div class="card-foot"><span class="card-tag">13 Misiones</span><span class="card-go">Abrir →</span></div>
           </a>
           <a class="card-sim" href="simuladores/ofimatica/calc-2-datos.html">
-            <div class="card-top"><span class="card-ico">📈</span><span class="card-num">3</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M16 7h6v6" />
+  <path d="m22 7-8.5 8.5-5-5L2 17" />
+</svg></span><span class="card-num">3</span></div>
             <div class="card-title">Planilla · Análisis de datos</div>
             <div class="card-desc">Filtrado masivo, ordenamiento multicriterio, construcción de tablas dinámicas y gráficos vinculados sobre series de ventas agropecuarias.</div>
             <div class="card-foot"><span class="card-tag">Tablas Dinámicas</span><span class="card-go">Abrir →</span></div>
@@ -886,7 +1412,13 @@
   <section class="catalog-sec sec-ref" id="sec-ref">
     <div class="sec-header">
       <div class="sec-title-group">
-        <h2>📐 Despieces Técnicos</h2>
+        <h2><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z" />
+  <path d="m14.5 12.5 2-2" />
+  <path d="m11.5 9.5 2-2" />
+  <path d="m8.5 6.5 2-2" />
+  <path d="m17.5 15.5 2-2" />
+</svg> Despieces Técnicos</h2>
         <span class="tag-cat">Anatomía de Hardware</span>
         <span class="tag-count">4 despieces</span>
       </div>
@@ -900,26 +1432,35 @@
     <div class="sec-body">
       <div class="carousel-wrapper">
         <div class="carousel-track">
-          <a class="card-sim" href="simuladores/dron/dron-despiece.html">
-            <div class="card-top"><span class="card-ico">🚁</span><span class="card-num">1</span></div>
+          <a class="card-sim" href="simuladores/dron/dron-despiece.html" data-viewer="true" title="Abrir en Visor Integrado">
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <polygon points="3 11 22 2 13 21 11 13 3 11" />
+</svg></span><span class="card-num">1</span></div>
             <div class="card-title">Dron multirrotor</div>
             <div class="card-desc">Controladora de vuelo, variadores ESC, motores brushless, hélices de paso inverso, receptor telemetría y módulo GPS/brújula.</div>
             <div class="card-foot"><span class="card-tag">Aviónica</span><span class="card-go">Abrir →</span></div>
           </a>
           <a class="card-sim" href="simuladores/iot/arduino-despiece.html">
-            <div class="card-top"><span class="card-ico">🔧</span><span class="card-num">2</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z" />
+</svg></span><span class="card-num">2</span></div>
             <div class="card-title">Sistema Arduino</div>
             <div class="card-desc">Despiece del encapsulado, oscilador de cristal de cuarzo, conversor USB-Serial, reguladores LDO y mapa de registros del chip.</div>
             <div class="card-foot"><span class="card-tag">Microelectrónica</span><span class="card-go">Abrir →</span></div>
           </a>
           <a class="card-sim" href="simuladores/meteo/estacion-meteorologica.html">
-            <div class="card-top"><span class="card-ico">🌡️</span><span class="card-num">3</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z" />
+</svg></span><span class="card-num">3</span></div>
             <div class="card-title">Estación meteorológica</div>
             <div class="card-desc">Pluviómetro de balancín basculante, sensor termo-higrométrico protegido de radiación solar y transductor de velocidad de viento.</div>
             <div class="card-foot"><span class="card-tag">Metrología</span><span class="card-go">Abrir →</span></div>
           </a>
           <a class="card-sim" href="simuladores/iot/vivero-automatizado.html">
-            <div class="card-top"><span class="card-ico">💧</span><span class="card-num">4</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z" />
+  <path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97" />
+</svg></span><span class="card-num">4</span></div>
             <div class="card-title">Vivero automatizado</div>
             <div class="card-desc">Bombas peristálticas dosificadoras de fertilizante, electroválvulas solenoides de diafragma y colectores de distribución presurizados.</div>
             <div class="card-foot"><span class="card-tag">Agrotecnología</span><span class="card-go">Abrir →</span></div>
@@ -933,7 +1474,10 @@
   <section class="catalog-sec sec-lab" id="sec-lab">
     <div class="sec-header">
       <div class="sec-title-group">
-        <h2>🔬 Laboratorios Autónomos (SIG, CAD & Gestión)</h2>
+        <h2><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <circle cx="12" cy="10" r="3" />
+</svg> Laboratorios Autónomos (SIG, CAD & Gestión)</h2>
         <span class="tag-cat">Prácticas Territoriales</span>
         <span class="tag-count">5 módulos</span>
       </div>
@@ -947,35 +1491,66 @@
     <div class="sec-body">
       <div class="carousel-wrapper">
         <div class="carousel-track">
-          <a class="card-sim" href="simuladores/sig-cad/sig-teledeteccion-autonomo.html">
-            <div class="card-top"><span class="card-ico">🛰️</span><span class="card-num">I</span></div>
+          <a class="card-sim" href="simuladores/sig-cad/sig-teledeteccion-autonomo.html" data-viewer="true" title="Abrir en Visor Integrado">
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="m13.5 6.5-3.148-3.148a1.205 1.205 0 0 0-1.704 0L6.352 5.648a1.205 1.205 0 0 0 0 1.704L9.5 10.5" />
+  <path d="M16.5 7.5 19 5" />
+  <path d="m17.5 10.5 3.148 3.148a1.205 1.205 0 0 1 0 1.704l-2.296 2.296a1.205 1.205 0 0 1-1.704 0L13.5 14.5" />
+  <path d="M9 21a6 6 0 0 0-6-6" />
+  <path d="M9.352 10.648a1.205 1.205 0 0 0 0 1.704l2.296 2.296a1.205 1.205 0 0 0 1.704 0l4.296-4.296a1.205 1.205 0 0 0 0-1.704l-2.296-2.296a1.205 1.205 0 0 0-1.704 0z" />
+</svg></span><span class="card-num">I</span></div>
             <div class="card-title">Laboratorio SIG y teledetección I</div>
             <div class="card-desc">Capas vectoriales, tablas de atributos, consultas espaciales, índices espectrales NDVI y zonificación agronómica con misión de incendios.</div>
-            <div class="card-foot"><span class="card-tag">Escena Sintética</span><span class="card-go">Abrir →</span></div>
+            <div class="card-foot"><span class="card-tag">Escena Sintética</span><span class="card-go">Visor ↗</span></div>
           </a>
-          <a class="card-sim" href="sig-teledeteccion-ii/index.html">
-            <div class="card-top"><span class="card-ico">🛰️</span><span class="card-num">II</span></div>
+          <a class="card-sim" href="sig-teledeteccion-ii/index.html" data-viewer="true" title="Abrir en Visor Integrado">
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="m13.5 6.5-3.148-3.148a1.205 1.205 0 0 0-1.704 0L6.352 5.648a1.205 1.205 0 0 0 0 1.704L9.5 10.5" />
+  <path d="M16.5 7.5 19 5" />
+  <path d="m17.5 10.5 3.148 3.148a1.205 1.205 0 0 1 0 1.704l-2.296 2.296a1.205 1.205 0 0 1-1.704 0L13.5 14.5" />
+  <path d="M9 21a6 6 0 0 0-6-6" />
+  <path d="M9.352 10.648a1.205 1.205 0 0 0 0 1.704l2.296 2.296a1.205 1.205 0 0 0 1.704 0l4.296-4.296a1.205 1.205 0 0 0 0-1.704l-2.296-2.296a1.205 1.205 0 0 0-1.704 0z" />
+</svg></span><span class="card-num">II</span></div>
             <div class="card-title">Laboratorio SIG y teledetección II</div>
             <div class="card-desc"><b>Escenas reales destiladas:</b> Sentinel-2 y Landsat del valle de Viedma e incendios de Los Alerces. Buffers, aptitud edáfica, bandas y dNBR.</div>
-            <div class="card-foot"><span class="card-tag">Datos Sentinel / USGS</span><span class="card-go">Abrir →</span></div>
+            <div class="card-foot"><span class="card-tag">Datos Sentinel / USGS</span><span class="card-go">Visor ↗</span></div>
           </a>
-          <a class="card-sim" href="simuladores/sig-cad/cad-espacios-verdes-autonomo.html">
-            <div class="card-top"><span class="card-ico">📏</span><span class="card-num">CAD</span></div>
+          <a class="card-sim" href="simuladores/sig-cad/cad-espacios-verdes-autonomo.html" data-viewer="true" title="Abrir en Visor Integrado">
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z" />
+  <path d="m14.5 12.5 2-2" />
+  <path d="m11.5 9.5 2-2" />
+  <path d="m8.5 6.5 2-2" />
+  <path d="m17.5 15.5 2-2" />
+</svg></span><span class="card-num">CAD</span></div>
             <div class="card-title">Laboratorio CAD para espacios verdes</div>
             <div class="card-desc">Dibujo técnico asistido por computadora: precisión milimétrica, acotado, gestión de capas temáticas y planos paisajísticos para diseño urbano.</div>
-            <div class="card-foot"><span class="card-tag">Diseño Urbano</span><span class="card-go">Abrir →</span></div>
+            <div class="card-foot"><span class="card-tag">Diseño Urbano</span><span class="card-go">Visor ↗</span></div>
           </a>
-          <a class="card-sim" href="simuladores/sig-cad/simulador-opencad-espacios-verdes.html">
-            <div class="card-top"><span class="card-ico">📐</span><span class="card-num">App</span></div>
+          <a class="card-sim" href="simuladores/sig-cad/simulador-opencad-espacios-verdes.html" data-viewer="true" title="Abrir en Visor Integrado">
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="m12.99 6.74 1.93 3.44" />
+  <path d="M19.136 12a10 10 0 0 1-14.271 0" />
+  <path d="m21 21-2.16-3.84" />
+  <path d="m3 21 8.02-14.26" />
+  <circle cx="12" cy="5" r="2" />
+</svg></span><span class="card-num">App</span></div>
             <div class="card-title">Simulador OpenCAD interactivo</div>
             <div class="card-desc">Mesa de dibujo interactiva basada en vectores para diseñar parquizaciones, senderos, canteros y distribución de especies arbóreas.</div>
-            <div class="card-foot"><span class="card-tag">OpenCAD Web</span><span class="card-go">Abrir →</span></div>
+            <div class="card-foot"><span class="card-tag">OpenCAD Web</span><span class="card-go">Visor ↗</span></div>
           </a>
-          <a class="card-sim" href="simuladores/sig-cad/gde-circuito-organizacional-autonomo.html">
-            <div class="card-top"><span class="card-ico">🏛️</span><span class="card-num">GDE</span></div>
+          <a class="card-sim" href="simuladores/sig-cad/gde-circuito-organizacional-autonomo.html" data-viewer="true" title="Abrir en Visor Integrado">
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M10 18v-7" />
+  <path d="M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z" />
+  <path d="M14 18v-7" />
+  <path d="M18 18v-7" />
+  <path d="M3 22h18" />
+  <path d="M6 18v-7" />
+</svg></span><span class="card-num">GDE</span></div>
             <div class="card-title">Circuito Organizacional GDE</div>
             <div class="card-desc">Simulación completa de administración pública: expediente electrónico (EE), documentos oficiales (GEDO), pases de sector y acceso a la información.</div>
-            <div class="card-foot"><span class="card-tag">Gestión Pública</span><span class="card-go">Abrir →</span></div>
+            <div class="card-foot"><span class="card-tag">Gestión Pública</span><span class="card-go">Visor ↗</span></div>
           </a>
         </div>
       </div>
@@ -986,7 +1561,12 @@
   <section class="catalog-sec sec-bi" id="sec-bi">
     <div class="sec-header">
       <div class="sec-title-group">
-        <h2>📊 Estudio de Business Intelligence (BI)</h2>
+        <h2><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3 3v16a2 2 0 0 0 2 2h16" />
+  <path d="M18 17V9" />
+  <path d="M13 17V5" />
+  <path d="M8 17v-3" />
+</svg> Estudio de Business Intelligence (BI)</h2>
         <span class="tag-cat">Looker Studio / Dashboards</span>
         <span class="tag-count">3 etapas</span>
       </div>
@@ -1001,19 +1581,37 @@
       <div class="carousel-wrapper">
         <div class="carousel-track">
           <a class="card-sim" href="simuladores/bi/bi-1-fuentes.html">
-            <div class="card-top"><span class="card-ico">🗂️</span><span class="card-num">1</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M20 5a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2.5a1.5 1.5 0 0 1 1.2.6l.6.8a1.5 1.5 0 0 0 1.2.6z" />
+  <path d="M3 8.268a2 2 0 0 0-1 1.738V19a2 2 0 0 0 2 2h11a2 2 0 0 0 1.732-1" />
+</svg></span><span class="card-num">1</span></div>
             <div class="card-title">Fuentes de datos y campos</div>
             <div class="card-desc">Conexión de repositorios tabulares, tipado de columnas, discriminación rigurosa entre dimensiones y métricas, y saneamiento de valores nulos.</div>
             <div class="card-foot"><span class="card-tag">Data Cleaning</span><span class="card-go">Abrir →</span></div>
           </a>
           <a class="card-sim" href="simuladores/bi/bi-2-informes.html">
-            <div class="card-top"><span class="card-ico">📊</span><span class="card-num">2</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3 3v16a2 2 0 0 0 2 2h16" />
+  <path d="M18 17V9" />
+  <path d="M13 17V5" />
+  <path d="M8 17v-3" />
+</svg></span><span class="card-num">2</span></div>
             <div class="card-title">Diseño de tableros y visualización</div>
             <div class="card-desc">Selección efectiva del gráfico adecuado para cada interrogante: tarjetas de valor único, barras comparativas, dispersión y series cronológicas.</div>
             <div class="card-foot"><span class="card-tag">Data Viz</span><span class="card-go">Abrir →</span></div>
           </a>
           <a class="card-sim" href="simuladores/bi/bi-3-interactivo.html">
-            <div class="card-top"><span class="card-ico">🎛️</span><span class="card-num">3</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M10 8h4" />
+  <path d="M12 21v-9" />
+  <path d="M12 8V3" />
+  <path d="M17 16h4" />
+  <path d="M19 12V3" />
+  <path d="M19 21v-5" />
+  <path d="M3 14h4" />
+  <path d="M5 10V3" />
+  <path d="M5 21v-7" />
+</svg></span><span class="card-num">3</span></div>
             <div class="card-title">Paneles interactivos y filtros</div>
             <div class="card-desc">Controles de filtrado cruzado dinámico, selectores de ventana temporal, campos calculados con agregaciones y permisos de auditoría.</div>
             <div class="card-foot"><span class="card-tag">Dashboards</span><span class="card-go">Abrir →</span></div>
@@ -1027,7 +1625,10 @@
   <section class="catalog-sec sec-segu" id="sec-segu">
     <div class="sec-header">
       <div class="sec-title-group">
-        <h2>🔐 Laboratorio de Ciberseguridad</h2>
+        <h2><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+  <path d="m9 12 2 2 4-4" />
+</svg> Laboratorio de Ciberseguridad</h2>
         <span class="tag-cat">Protección de Datos</span>
         <span class="tag-count">4 etapas</span>
       </div>
@@ -1042,25 +1643,38 @@
       <div class="carousel-wrapper">
         <div class="carousel-track">
           <a class="card-sim" href="simuladores/seguridad/segu-1-claves.html">
-            <div class="card-top"><span class="card-ico">🔑</span><span class="card-num">1</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z" />
+  <circle cx="16.5" cy="7.5" r=".5" fill="currentColor" />
+</svg></span><span class="card-num">1</span></div>
             <div class="card-title">Autenticación, claves y 2FA</div>
             <div class="card-desc">Probador de entropía, simulación de ataques por diccionario y fuerza bruta, y eficacia del segundo factor (2FA/TOTP) ante filtraciones.</div>
             <div class="card-foot"><span class="card-tag">Entropía & 2FA</span><span class="card-go">Abrir →</span></div>
           </a>
           <a class="card-sim" href="simuladores/seguridad/segu-2-cifrado.html">
-            <div class="card-top"><span class="card-ico">🏛️</span><span class="card-num">2</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+</svg></span><span class="card-num">2</span></div>
             <div class="card-title">Taller práctico de cifrado</div>
             <div class="card-desc">De la sustitución de César al cifrado asimétrico RSA: criptoanálisis por frecuencias y mecánica de clave pública y privada.</div>
             <div class="card-foot"><span class="card-tag">Criptografía</span><span class="card-go">Abrir →</span></div>
           </a>
           <a class="card-sim" href="simuladores/seguridad/segu-3-phishing.html">
-            <div class="card-top"><span class="card-ico">🎣</span><span class="card-num">3</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+  <path d="M12 8v4" />
+  <path d="M12 16h.01" />
+</svg></span><span class="card-num">3</span></div>
             <div class="card-title">Caza-phishing e ingeniería social</div>
             <div class="card-desc">Bandeja de entrada interactiva con 8 casos simulados: inspección de cabeceras, detección de URLs engañosas y respuesta ante incidentes.</div>
             <div class="card-foot"><span class="card-tag">Defensa Activa</span><span class="card-go">Abrir →</span></div>
           </a>
           <a class="card-sim" href="simuladores/seguridad/segu-4-firma-certificados.html">
-            <div class="card-top"><span class="card-ico">✍️</span><span class="card-num">4</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526" />
+  <circle cx="12" cy="8" r="6" />
+</svg></span><span class="card-num">4</span></div>
             <div class="card-title">Firma digital y certificados SSL</div>
             <div class="card-desc">Firmado criptográfico de documentos y correos con principio de no repudio (Ley 25.506) e inspección de certificados SSL del navegador.</div>
             <div class="card-foot"><span class="card-tag">Firma Ley 25.506</span><span class="card-go">Abrir →</span></div>
@@ -1074,7 +1688,11 @@
   <section class="catalog-sec sec-bd" id="sec-bd">
     <div class="sec-header">
       <div class="sec-title-group">
-        <h2>🗄️ Taller de Bases de Datos</h2>
+        <h2><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <ellipse cx="12" cy="5" rx="9" ry="3" />
+  <path d="M3 5V19A9 3 0 0 0 21 19V5" />
+  <path d="M3 12A9 3 0 0 0 21 12" />
+</svg> Taller de Bases de Datos</h2>
         <span class="tag-cat">Modelo Relacional & SQL</span>
         <span class="tag-count">3 etapas</span>
       </div>
@@ -1089,19 +1707,38 @@
       <div class="carousel-wrapper">
         <div class="carousel-track">
           <a class="card-sim" href="simuladores/bd/bd-1-tablas.html">
-            <div class="card-top"><span class="card-ico">🧱</span><span class="card-num">1</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2.97 12.92A2 2 0 0 0 2 14.63v3.24a2 2 0 0 0 .97 1.71l3 1.8a2 2 0 0 0 2.06 0L12 19v-5.5l-5-3-4.03 2.42Z" />
+  <path d="m7 16.5-4.74-2.85" />
+  <path d="m7 16.5 5-3" />
+  <path d="M7 16.5v5.17" />
+  <path d="M12 13.5V19l3.97 2.38a2 2 0 0 0 2.06 0l3-1.8a2 2 0 0 0 .97-1.71v-3.24a2 2 0 0 0-.97-1.71L17 10.5l-5 3Z" />
+  <path d="m17 16.5-5-3" />
+  <path d="m17 16.5 4.74-2.85" />
+  <path d="M17 16.5v5.17" />
+  <path d="M7.97 4.42A2 2 0 0 0 7 6.13v4.37l5 3 5-3V6.13a2 2 0 0 0-.97-1.71l-3-1.8a2 2 0 0 0-2.06 0l-3 1.8Z" />
+  <path d="M12 8 7.26 5.15" />
+  <path d="m12 8 4.74-2.85" />
+  <path d="M12 13.5V8" />
+</svg></span><span class="card-num">1</span></div>
             <div class="card-title">Diseño de tablas y normalización</div>
             <div class="card-desc">Detección de anomalías de redundancia y actualización en planillas únicas: creación de tablas normalizadas, claves primarias (PK) y foráneas (FK).</div>
             <div class="card-foot"><span class="card-tag">Normalización</span><span class="card-go">Abrir →</span></div>
           </a>
           <a class="card-sim" href="simuladores/bd/bd-2-consultas.html">
-            <div class="card-top"><span class="card-ico">💬</span><span class="card-num">2</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" />
+</svg></span><span class="card-num">2</span></div>
             <div class="card-title">Consultas con SQL real</div>
             <div class="card-desc">Interrogación directa al motor SQL del navegador: cláusulas SELECT, WHERE, filtros booleanos AND/OR, ordenamiento ORDER BY y límites.</div>
             <div class="card-foot"><span class="card-tag">Motor SQL</span><span class="card-go">Abrir →</span></div>
           </a>
           <a class="card-sim" href="simuladores/bd/bd-3-relaciones.html">
-            <div class="card-top"><span class="card-ico">🧩</span><span class="card-num">3</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" />
+  <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" />
+  <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" />
+</svg></span><span class="card-num">3</span></div>
             <div class="card-title">JOINs e integridad referencial</div>
             <div class="card-desc">Cruce relacional de entidades mediante INNER JOIN, visualización gráfica de vínculos de claves y verificación de restricciones de eliminación en cascada.</div>
             <div class="card-foot"><span class="card-tag">Relaciones JOIN</span><span class="card-go">Abrir →</span></div>
@@ -1115,7 +1752,16 @@
   <section class="catalog-sec sec-ia" id="sec-ia">
     <div class="sec-header">
       <div class="sec-title-group">
-        <h2>🤖 Laboratorio de Inteligencia Artificial</h2>
+        <h2><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 18V5" />
+  <path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4" />
+  <path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5" />
+  <path d="M17.997 5.125a4 4 0 0 1 2.526 5.77" />
+  <path d="M18 18a4 4 0 0 0 2-7.464" />
+  <path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517" />
+  <path d="M6 18a4 4 0 0 1-2-7.464" />
+  <path d="M6.003 5.125a4 4 0 0 0-2.526 5.77" />
+</svg> Laboratorio de Inteligencia Artificial</h2>
         <span class="tag-cat">Machine Learning Transparente</span>
         <span class="tag-count">3 etapas</span>
       </div>
@@ -1130,19 +1776,33 @@
       <div class="carousel-wrapper">
         <div class="carousel-track">
           <a class="card-sim" href="simuladores/ia/ia-1-clasificador.html">
-            <div class="card-top"><span class="card-ico">🍎</span><span class="card-num">1</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 6.528V3a1 1 0 0 1 1-1h0" />
+  <path d="M18.237 21A15 15 0 0 0 22 11a6 6 0 0 0-10-4.472A6 6 0 0 0 2 11a15.1 15.1 0 0 0 3.763 10 3 3 0 0 0 3.648.648 5.5 5.5 0 0 1 5.178 0A3 3 0 0 0 18.237 21" />
+</svg></span><span class="card-num">1</span></div>
             <div class="card-title">Entrená un clasificador</div>
             <div class="card-desc">Etiquetado manual de muestras, entrenamiento de fronteras de decisión y análisis de errores producidos por datos envenenados o sesgados.</div>
             <div class="card-foot"><span class="card-tag">Supervisado</span><span class="card-go">Abrir →</span></div>
           </a>
           <a class="card-sim" href="simuladores/ia/ia-2-sesgo.html">
-            <div class="card-top"><span class="card-ico">⚖️</span><span class="card-num">2</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 3v18" />
+  <path d="m19 8 3 8a5 5 0 0 1-6 0zV7" />
+  <path d="M3 7h1a17 17 0 0 0 8-2 17 17 0 0 0 8 2h1" />
+  <path d="m5 8 3 8a5 5 0 0 1-6 0zV7" />
+  <path d="M7 21h10" />
+</svg></span><span class="card-num">2</span></div>
             <div class="card-title">Auditoría ética del sesgo</div>
             <div class="card-desc">Auditoría forense sobre un algoritmo de adjudicación de becas: variables proxy, discriminación estadística indirecta y la necesidad de supervisión humana.</div>
             <div class="card-foot"><span class="card-tag">Ética Algorítmica</span><span class="card-go">Abrir →</span></div>
           </a>
           <a class="card-sim" href="simuladores/ia/ia-3-generador.html">
-            <div class="card-top"><span class="card-ico">✍️</span><span class="card-num">3</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
+  <path d="M20 2v4" />
+  <path d="M22 4h-4" />
+  <circle cx="4" cy="20" r="2" />
+</svg></span><span class="card-num">3</span></div>
             <div class="card-title">Modelos generativos de texto</div>
             <div class="card-desc">«Predice, no sabe»: funcionamiento interno de los LLMs con distribución de probabilidades de tokens, muestreo de temperatura y alucinaciones.</div>
             <div class="card-foot"><span class="card-tag">LLM Predictivo</span><span class="card-go">Abrir →</span></div>
@@ -1156,7 +1816,11 @@
   <section class="catalog-sec sec-moodle" id="sec-moodle">
     <div class="sec-header">
       <div class="sec-title-group">
-        <h2>🎓 Campus Virtual Simulado</h2>
+        <h2><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" />
+  <path d="M22 10v6" />
+  <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
+</svg> Campus Virtual Simulado</h2>
         <span class="tag-cat">Entornos Moodle</span>
         <span class="tag-count">3 perfiles</span>
       </div>
@@ -1171,19 +1835,32 @@
       <div class="carousel-wrapper">
         <div class="carousel-track">
           <a class="card-sim" href="simuladores/moodle/moodle-1-estudiante.html">
-            <div class="card-top"><span class="card-ico">🎒</span><span class="card-num">1</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4 10a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" />
+  <path d="M8 10h8" />
+  <path d="M8 18h8" />
+  <path d="M8 22v-6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v6" />
+  <path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />
+</svg></span><span class="card-num">1</span></div>
             <div class="card-title">Perfil Estudiante</div>
             <div class="card-desc">Descarga de recursos bibliográficos, entrega de actividades con límite de fecha, participación en foros y cuestionarios con calificación automática.</div>
             <div class="card-foot"><span class="card-tag">Rol Estudiante</span><span class="card-go">Abrir →</span></div>
           </a>
           <a class="card-sim" href="simuladores/moodle/moodle-2-docente.html">
-            <div class="card-top"><span class="card-ico">🍎</span><span class="card-num">2</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="m16 11 2 2 4-4" />
+  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+  <circle cx="9" cy="7" r="4" />
+</svg></span><span class="card-num">2</span></div>
             <div class="card-title">Perfil Docente</div>
             <div class="card-desc">Modo edición del aula, alta de tareas, configuración de ponderaciones en el libro de calificaciones y corrección mediante rúbricas analíticas.</div>
             <div class="card-foot"><span class="card-tag">Rol Docente</span><span class="card-go">Abrir →</span></div>
           </a>
           <a class="card-sim" href="simuladores/moodle/moodle-3-admin.html">
-            <div class="card-top"><span class="card-ico">🔧</span><span class="card-num">3</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />
+  <circle cx="12" cy="12" r="3" />
+</svg></span><span class="card-num">3</span></div>
             <div class="card-title">Perfil Administrador</div>
             <div class="card-desc">Matriculación masiva de cohortes, asignación de permisos y roles granulares, políticas de seguridad de claves y backups del servidor.</div>
             <div class="card-foot"><span class="card-tag">Rol Sysadmin</span><span class="card-go">Abrir →</span></div>
@@ -1197,7 +1874,12 @@
   <section class="catalog-sec sec-eje" id="sec-eje">
     <div class="sec-header">
       <div class="sec-title-group">
-        <h2>📚 Resoluciones de Ejercicios y Guías</h2>
+        <h2><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="m16 6 4 14" />
+  <path d="M12 6v14" />
+  <path d="M8 8v12" />
+  <path d="M4 4v16" />
+</svg> Resoluciones de Ejercicios y Guías</h2>
         <span class="tag-cat">Material Académico</span>
         <span class="tag-count">3 suites</span>
       </div>
@@ -1211,23 +1893,38 @@
     <div class="sec-body">
       <div class="carousel-wrapper">
         <div class="carousel-track">
-          <a class="card-sim" href="resoluciones-ejercicios/index.html">
-            <div class="card-top"><span class="card-ico">📖</span><span class="card-num">GEN</span></div>
+          <a class="card-sim" href="resoluciones-ejercicios/index.html" data-viewer="true" title="Abrir en Visor Integrado">
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 5v16" />
+  <path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z" />
+</svg></span><span class="card-num">GEN</span></div>
             <div class="card-title">Resoluciones de Ejercicios Generales</div>
             <div class="card-desc">Repositorio exhaustivo de actividades prácticas resueltas para las distintas materias del seminario tecnológico.</div>
-            <div class="card-foot"><span class="card-tag">Casos de Estudio</span><span class="card-go">Abrir →</span></div>
+            <div class="card-foot"><span class="card-tag">Casos de Estudio</span><span class="card-go">Visor Integrado ↗</span></div>
           </a>
-          <a class="card-sim" href="resoluciones-ejercicios-cad/index.html">
-            <div class="card-top"><span class="card-ico">📐</span><span class="card-num">CAD</span></div>
+          <a class="card-sim" href="resoluciones-ejercicios-cad/index.html" data-viewer="true" title="Abrir en Visor Integrado">
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="m12.99 6.74 1.93 3.44" />
+  <path d="M19.136 12a10 10 0 0 1-14.271 0" />
+  <path d="m21 21-2.16-3.84" />
+  <path d="m3 21 8.02-14.26" />
+  <circle cx="12" cy="5" r="2" />
+</svg></span><span class="card-num">CAD</span></div>
             <div class="card-title">Resoluciones y Guías de CAD</div>
             <div class="card-desc">Secuencias guiadas para dibujo asistido: trazado de poligonales, cotas, bloques paramétricos e implantaciones paisajísticas.</div>
-            <div class="card-foot"><span class="card-tag">Planos Guiados</span><span class="card-go">Abrir →</span></div>
+            <div class="card-foot"><span class="card-tag">Planos Guiados</span><span class="card-go">Visor Integrado ↗</span></div>
           </a>
-          <a class="card-sim" href="resoluciones-ejercicios-qgis/index.html">
-            <div class="card-top"><span class="card-ico">🛰️</span><span class="card-num">QGIS</span></div>
+          <a class="card-sim" href="resoluciones-ejercicios-qgis/index.html" data-viewer="true" title="Abrir en Visor Integrado">
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="m13.5 6.5-3.148-3.148a1.205 1.205 0 0 0-1.704 0L6.352 5.648a1.205 1.205 0 0 0 0 1.704L9.5 10.5" />
+  <path d="M16.5 7.5 19 5" />
+  <path d="m17.5 10.5 3.148 3.148a1.205 1.205 0 0 1 0 1.704l-2.296 2.296a1.205 1.205 0 0 1-1.704 0L13.5 14.5" />
+  <path d="M9 21a6 6 0 0 0-6-6" />
+  <path d="M9.352 10.648a1.205 1.205 0 0 0 0 1.704l2.296 2.296a1.205 1.205 0 0 0 1.704 0l4.296-4.296a1.205 1.205 0 0 0 0-1.704l-2.296-2.296a1.205 1.205 0 0 0-1.704 0z" />
+</svg></span><span class="card-num">QGIS</span></div>
             <div class="card-title">Resoluciones y Videotutoriales QGIS</div>
             <div class="card-desc">Colección multimedia completa: videos en alta resolución con pistas de subtítulos (VTT/SRT) y guías en formato PDF.</div>
-            <div class="card-foot"><span class="card-tag">Videos + PDFs</span><span class="card-go">Abrir →</span></div>
+            <div class="card-foot"><span class="card-tag">Videos + PDFs</span><span class="card-go">Visor Integrado ↗</span></div>
           </a>
         </div>
       </div>
@@ -1238,7 +1935,11 @@
   <section class="catalog-sec sec-alt" id="sec-alt">
     <div class="sec-header">
       <div class="sec-title-group">
-        <h2>🧪 Prototipos Alternativos</h2>
+        <h2><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2" />
+  <path d="M6.453 15h11.094" />
+  <path d="M8.5 2h7" />
+</svg> Prototipos Alternativos</h2>
         <span class="tag-cat">Laboratorio I+D</span>
         <span class="tag-count">2 prototipos</span>
       </div>
@@ -1252,14 +1953,24 @@
     <div class="sec-body">
       <div class="carousel-wrapper">
         <div class="carousel-track">
-          <a class="card-sim" href="simuladores/dron/modo-libre-gemini.html">
-            <div class="card-top"><span class="card-ico">🎮</span><span class="card-num">PAD</span></div>
+          <a class="card-sim" href="simuladores/dron/modo-libre-gemini.html" data-viewer="true" title="Abrir en Visor Integrado">
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <line x1="6" x2="10" y1="11" y2="11" />
+  <line x1="8" x2="8" y1="9" y2="13" />
+  <line x1="15" x2="15.01" y1="12" y2="12" />
+  <line x1="18" x2="18.01" y1="10" y2="10" />
+  <path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z" />
+</svg></span><span class="card-num">PAD</span></div>
             <div class="card-title">Modo libre · Gemini Gamepad Edition</div>
             <div class="card-desc">Edición experimental del simulador de dron con soporte nativo de mandos físicos (Xbox/PS) por Web Gamepad API.</div>
             <div class="card-foot"><span class="card-tag">Gamepad API</span><span class="card-go">Abrir →</span></div>
           </a>
           <a class="card-sim" href="simuladores/meteo/estacion-meteorologica-gemini.html">
-            <div class="card-top"><span class="card-ico">🌐</span><span class="card-num">3D</span></div>
+            <div class="card-top"><span class="card-ico"><svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="10" />
+  <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+  <path d="M2 12h20" />
+</svg></span><span class="card-num">3D</span></div>
             <div class="card-title">Estación meteorológica inmersiva</div>
             <div class="card-desc">Versión alternativa del centro de control con modelos tridimensionales interactivos y simulación física de fluidos.</div>
             <div class="card-foot"><span class="card-tag">Prototipo 3D</span><span class="card-go">Abrir →</span></div>
@@ -1269,6 +1980,64 @@
     </div>
   </section>
 
+</div>
+
+
+<!-- ============================================================
+     MODAL VISOR ESPECIAL INTEGRADO (TUTORIALES, GUÍAS Y LABS)
+     ============================================================ -->
+<div id="curza-viewer" class="curza-viewer-overlay" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="curza-viewer-backdrop" id="viewer-backdrop"></div>
+  <div class="curza-viewer-window" id="viewer-window">
+    <div class="curza-viewer-header">
+      <div class="curza-viewer-meta">
+        <div class="curza-viewer-icon" id="viewer-icon">
+          <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 5v16" />
+            <path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z" />
+          </svg>
+        </div>
+        <div class="curza-viewer-titles">
+          <span class="curza-viewer-badge" id="viewer-badge">Material Académico</span>
+          <h3 class="curza-viewer-title" id="viewer-title">Visor Interactivo</h3>
+        </div>
+      </div>
+      <div class="curza-viewer-actions">
+        <a class="viewer-btn" id="viewer-btn-newtab" href="#" target="_blank" rel="noopener noreferrer" title="Abrir en pestaña nueva">
+          <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 3h6v6" />
+            <path d="M10 14 21 3" />
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+          </svg>
+          <span class="btn-text">Pestaña nueva</span>
+        </a>
+        <button type="button" class="viewer-btn viewer-btn-fullscreen" id="viewer-btn-fullscreen" title="Pantalla completa (F)" aria-label="Pantalla completa">
+          <span id="viewer-fs-icon">
+            <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 3h6v6" />
+              <path d="m21 3-7 7" />
+              <path d="m3 21 7-7" />
+              <path d="M9 21H3v-6" />
+            </svg>
+          </span>
+          <span id="viewer-fs-text" class="btn-text">Pantalla completa</span>
+        </button>
+        <button type="button" class="viewer-btn viewer-btn-close" id="viewer-btn-close" title="Cerrar visor (Esc)" aria-label="Cerrar visor">
+          <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18" />
+            <path d="m6 6 12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="curza-viewer-body">
+      <div class="curza-viewer-loader" id="viewer-loader">
+        <div class="viewer-spinner"></div>
+        <span>Cargando visor interactivo...</span>
+      </div>
+      <iframe id="curza-viewer-frame" class="curza-viewer-frame" allow="fullscreen; clipboard-read; clipboard-write" loading="lazy"></iframe>
+    </div>
+  </div>
 </div>
 
 <!-- PIE DE PÁGINA -->
@@ -1282,6 +2051,8 @@
 <script>
   // 1. Navegación vertical fluida entre secciones con rueda del ratón y control horizontal
   let isNavigatingSection = false;
+  let isViewerOpen = false;
+  let isViewerMaximized = false;
 
   document.querySelectorAll('.catalog-sec').forEach(sec => {
     const track = sec.querySelector('.carousel-track');
@@ -1290,6 +2061,7 @@
 
     // Manejador de rueda (wheel) en la sección
     sec.addEventListener('wheel', (e) => {
+      if (isViewerOpen) return;
       // Caso A: El usuario mantiene Shift presionado, o hace un swipe puramente horizontal (ej. trackpad)
       if ((e.shiftKey || Math.abs(e.deltaX) > Math.abs(e.deltaY)) && track) {
         e.preventDefault();
@@ -1405,7 +2177,8 @@
         sec.classList.remove('collapsed');
       }
     });
-    btnToggleAll.textContent = allCollapsed ? '📂 Expandir' : '📁 Contraer';
+    const folderIco = allCollapsed ? `<svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2" /></svg>` : `<svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" /></svg>`;
+    btnToggleAll.innerHTML = folderIco + ' <span class="btn-text">' + (allCollapsed ? 'Expandir' : 'Contraer') + '</span>';
   });
 
   // 5. Barra de píldoras de categorías (scroll directo y filtro)
@@ -1493,6 +2266,210 @@
   });
 
   document.querySelectorAll('.catalog-sec').forEach(sec => secObserver.observe(sec));
+
+  // 8. Navegación fluida con teclado (Flechas Arriba/Abajo, PageUp/PageDown)
+  window.addEventListener('keydown', (e) => {
+    if (isViewerOpen) return;
+    if (document.activeElement === searchInput) return;
+
+    if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+      const current = document.querySelector('.catalog-sec.in-view') || document.querySelector('.catalog-sec');
+      const allSecs = Array.from(document.querySelectorAll('.catalog-sec:not([style*="display: none"])'));
+      const idx = allSecs.indexOf(current);
+      if (idx !== -1 && idx < allSecs.length - 1) {
+        e.preventDefault();
+        allSecs[idx + 1].scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+      const current = document.querySelector('.catalog-sec.in-view') || document.querySelector('.catalog-sec');
+      const allSecs = Array.from(document.querySelectorAll('.catalog-sec:not([style*="display: none"])'));
+      const idx = allSecs.indexOf(current);
+      if (idx > 0) {
+        e.preventDefault();
+        allSecs[idx - 1].scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  });
+
+  // ============================================================
+  // 9. CONTROLADOR DEL VISOR ESPECIAL INTEGRADO (FULLSCREEN & MODAL)
+  // ============================================================
+  const viewerOverlay = document.getElementById('curza-viewer');
+  const viewerWindow = document.getElementById('viewer-window');
+  const viewerFrame = document.getElementById('curza-viewer-frame');
+  const viewerLoader = document.getElementById('viewer-loader');
+  const viewerBackdrop = document.getElementById('viewer-backdrop');
+  const viewerBtnClose = document.getElementById('viewer-btn-close');
+  const viewerBtnFullscreen = document.getElementById('viewer-btn-fullscreen');
+  const viewerBtnNewTab = document.getElementById('viewer-btn-newtab');
+  const viewerTitle = document.getElementById('viewer-title');
+  const viewerBadge = document.getElementById('viewer-badge');
+  const viewerIcon = document.getElementById('viewer-icon');
+  const viewerFsIcon = document.getElementById('viewer-fs-icon');
+  const viewerFsText = document.getElementById('viewer-fs-text');
+
+  isViewerOpen = false;
+  isViewerMaximized = false;
+
+  const fsMaximizeSvg = '<svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6" /><path d="m21 3-7 7" /><path d="m3 21 7-7" /><path d="M9 21H3v-6" /></svg>';
+  const fsMinimizeSvg = '<svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m14 10 7-7" /><path d="M20 10h-6V4" /><path d="m3 21 7-7" /><path d="M4 14h6v6" /></svg>';
+
+  function openInViewer(url, title, badge, iconSvg, accentColor) {
+    if (!url) return;
+    
+    // Configurar metadatos
+    viewerTitle.textContent = title || 'Visor Interactivo';
+    viewerBadge.textContent = badge || 'Recurso Integrado';
+    if (iconSvg) {
+      viewerIcon.innerHTML = iconSvg;
+    }
+    if (accentColor) {
+      viewerIcon.style.color = accentColor;
+      viewerIcon.style.borderColor = accentColor;
+    }
+
+    // Configurar enlace para pestaña nueva
+    viewerBtnNewTab.href = url;
+
+    // Mostrar loader y cargar URL en iframe
+    viewerLoader.classList.remove('is-hidden');
+    viewerFrame.src = url;
+
+    viewerFrame.onload = () => {
+      viewerLoader.classList.add('is-hidden');
+    };
+
+    // Abrir overlay
+    viewerOverlay.classList.add('is-active');
+    viewerOverlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    isViewerOpen = true;
+  }
+
+  function closeViewer() {
+    if (!isViewerOpen) return;
+
+    viewerOverlay.classList.remove('is-active');
+    viewerOverlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    
+    // Si estaba maximizado nativamente, salir
+    if (document.fullscreenElement) {
+      document.exitFullscreen().catch(() => {});
+    }
+
+    // Restaurar estado ventana
+    viewerWindow.classList.remove('is-maximized');
+    viewerOverlay.classList.remove('is-fullscreen-mode');
+    isViewerMaximized = false;
+    viewerFsIcon.innerHTML = fsMaximizeSvg;
+    viewerFsText.textContent = 'Pantalla completa';
+
+    // Desconectar iframe para liberar memoria y detener audios/videos
+    setTimeout(() => {
+      viewerFrame.src = 'about:blank';
+      viewerLoader.classList.remove('is-hidden');
+    }, 280);
+
+    isViewerOpen = false;
+  }
+
+  function toggleViewerFullscreen() {
+    isViewerMaximized = !isViewerMaximized;
+
+    if (isViewerMaximized) {
+      viewerWindow.classList.add('is-maximized');
+      viewerOverlay.classList.add('is-fullscreen-mode');
+      viewerFsIcon.innerHTML = fsMinimizeSvg;
+      viewerFsText.textContent = 'Restaurar';
+
+      // Intentar fullscreen nativo de navegador
+      if (!document.fullscreenElement && viewerOverlay.requestFullscreen) {
+        viewerOverlay.requestFullscreen().catch(() => {});
+      }
+    } else {
+      viewerWindow.classList.remove('is-maximized');
+      viewerOverlay.classList.remove('is-fullscreen-mode');
+      viewerFsIcon.innerHTML = fsMaximizeSvg;
+      viewerFsText.textContent = 'Pantalla completa';
+
+      if (document.fullscreenElement && document.exitFullscreen) {
+        document.exitFullscreen().catch(() => {});
+      }
+    }
+  }
+
+  // Detectar cambios en fullscreen nativo (por ejemplo con tecla F11 o Escape)
+  document.addEventListener('fullscreenchange', () => {
+    if (!document.fullscreenElement && isViewerMaximized) {
+      viewerWindow.classList.remove('is-maximized');
+      viewerOverlay.classList.remove('is-fullscreen-mode');
+      isViewerMaximized = false;
+      viewerFsIcon.innerHTML = fsMaximizeSvg;
+      viewerFsText.textContent = 'Pantalla completa';
+    }
+  });
+
+  // Eventos de botones y backdrop
+  viewerBtnClose.addEventListener('click', closeViewer);
+  viewerBackdrop.addEventListener('click', closeViewer);
+  viewerBtnFullscreen.addEventListener('click', toggleViewerFullscreen);
+
+  // Atajos de teclado en el visor (Esc para salir, F para fullscreen)
+  window.addEventListener('keydown', (e) => {
+    if (!isViewerOpen) return;
+
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      closeViewer();
+    } else if ((e.key === 'f' || e.key === 'F') && document.activeElement !== searchInput) {
+      e.preventDefault();
+      toggleViewerFullscreen();
+    }
+  });
+
+  function openViewerForElement(trigger) {
+    if (!trigger) return;
+    const url = trigger.getAttribute('href');
+    const titleEl = trigger.querySelector('.card-title') || trigger.querySelector('.btn-text') || trigger.querySelector('span:not(.card-ico)');
+    const title = titleEl ? titleEl.textContent.trim() : trigger.getAttribute('title') || 'Visor';
+    const tagEl = trigger.querySelector('.card-tag') || trigger.querySelector('.tag-cat');
+    const tag = tagEl ? tagEl.textContent.trim() : 'Recurso';
+    const iconEl = trigger.querySelector('.card-ico') || trigger.querySelector('.ico-svg');
+    const iconSvg = iconEl ? (iconEl.tagName.toLowerCase() === 'svg' ? iconEl.outerHTML : iconEl.innerHTML) : '';
+    const section = trigger.closest('.catalog-sec');
+    const accentColor = section ? getComputedStyle(section).getPropertyValue('--accent-color').trim() : '';
+
+    openInViewer(url, title, tag, iconSvg, accentColor);
+  }
+
+  // A. Asignación directa a cada enlace con data-viewer="true"
+  document.querySelectorAll('[data-viewer="true"]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      if (e.ctrlKey || e.metaKey || e.shiftKey) return;
+      e.preventDefault();
+      e.stopPropagation();
+      openViewerForElement(el);
+    }, false);
+  });
+
+  // B. Delegación global con fase de captura (useCapture: true) para máxima prioridad
+  document.addEventListener('click', (e) => {
+    const trigger = e.target.closest('[data-viewer="true"]');
+    if (!trigger) return;
+
+    if (e.ctrlKey || e.metaKey || e.shiftKey) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+    openViewerForElement(trigger);
+  }, true);
+
+  // Exponer API global
+  window.openInViewer = openInViewer;
+  window.closeViewer = closeViewer;
+  window.toggleViewerFullscreen = toggleViewerFullscreen;
+
 </script>
 
 </body>
