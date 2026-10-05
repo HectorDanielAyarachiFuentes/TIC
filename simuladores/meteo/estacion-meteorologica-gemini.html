@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#071116">
+<title>Estacion meteorologica inmersiva</title>
+<style>
+  :root{
+    --bg:#071116;--panel:#0d1a22e8;--panel2:#132631;--ink:#edf7f1;--muted:#9ab0a6;
+    --line:#24404d;--accent:#42d5ff;--accent2:#6ee7a8;--warn:#ffcc44;--danger:#ff6b5f;
+    --good:#35d978;--glass:#071018bb;--tap:44px;font-synthesis:none;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-text-size-adjust:100%}
+  body{min-height:100dvh;overflow:hidden}
+  button,input{font:inherit}
+  .app{height:100dvh;display:grid;grid-template-columns:310px minmax(420px,1fr) 360px;grid-template-rows:auto 1fr;grid-template-areas:"header header header" "controls scene telemetry";min-height:0;min-width:0}
+  header{grid-area:header;display:flex;align-items:center;gap:12px;padding:10px 14px;padding-top:max(10px,env(safe-area-inset-top));background:linear-gradient(180deg,#0b1921,#071116);border-bottom:1px solid var(--line);z-index:10}
+  .brand{display:flex;flex-direction:column;min-width:0}.brand b{font-size:15px;letter-spacing:.2px}.brand span{font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sp{flex:1}.top-actions{display:flex;align-items:center;gap:8px;min-width:0}.chip{border:1px solid var(--line);background:#0b1720;border-radius:999px;padding:6px 10px;font-size:12px;color:var(--muted)}.chip b{color:var(--ink)}
+  .btn,.iconbtn{min-height:var(--tap);border:1px solid var(--line);border-radius:10px;background:var(--panel2);color:var(--ink);cursor:pointer}
+  .btn{padding:0 12px;font-size:13px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:7px}
+  .btn.primary{background:linear-gradient(180deg,var(--accent),#1b8bb8);border-color:#2bb6df;color:#03121a}.btn:active,.iconbtn:active{transform:scale(.97)}
+  .iconbtn{width:var(--tap);font-size:18px}
+  aside,.scene-wrap{min-height:0}
+  .controls{grid-area:controls;border-right:1px solid var(--line);background:var(--panel);overflow:auto;padding:14px;display:flex;flex-direction:column;gap:12px}
+  .telemetry{grid-area:telemetry;border-left:1px solid var(--line);background:var(--panel);overflow:auto;padding:14px;display:flex;flex-direction:column;gap:12px}
+  .scene-wrap{grid-area:scene;position:relative;overflow:hidden;background:#061016}
+  #scene{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .scene-tip{position:absolute;left:14px;top:14px;max-width:520px;background:var(--glass);border:1px solid var(--line);border-radius:12px;padding:10px 12px;backdrop-filter:blur(10px)}
+  .scene-tip b{display:block;font-size:13px}.scene-tip span{display:block;color:var(--muted);font-size:12px;line-height:1.45;margin-top:3px}
+  .scene-status{position:absolute;left:14px;bottom:14px;right:14px;display:flex;gap:8px;flex-wrap:wrap}
+  .status-pill{background:var(--glass);border:1px solid var(--line);border-radius:999px;padding:7px 10px;font-size:12px;color:var(--muted);backdrop-filter:blur(10px)}
+  .status-pill strong{color:var(--ink)}
+  .card{background:#0b1720;border:1px solid var(--line);border-radius:12px;padding:12px}
+  .card h2,.card h3{margin:0 0 9px;font-size:12px;text-transform:uppercase;letter-spacing:.7px;color:var(--accent);font-weight:900}
+  .card p{margin:0;color:#d7e5dd;font-size:13px;line-height:1.48}
+  .presets{display:grid;grid-template-columns:1fr 1fr;gap:7px}.preset{min-height:36px;border:1px solid var(--line);border-radius:9px;background:#101f29;color:var(--ink);font-size:12px;font-weight:800;cursor:pointer}
+  .preset.active{border-color:var(--accent);box-shadow:0 0 0 2px #42d5ff26}
+  .control{display:grid;gap:7px;margin-top:10px}.control:first-of-type{margin-top:0}
+  .control label{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.55px}
+  .control output{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--ink);text-transform:none;letter-spacing:0}
+  input[type=range]{width:100%;accent-color:var(--accent)}
+  .sensor-list{display:grid;gap:8px}.sensor-btn{display:flex;align-items:center;gap:8px;width:100%;border:1px solid var(--line);background:#101f29;color:var(--ink);border-radius:10px;min-height:42px;padding:8px 10px;text-align:left;cursor:pointer}
+  .sensor-btn b{font-size:13px}.sensor-btn span{margin-left:auto;font-size:10px;color:var(--muted);text-transform:uppercase;font-weight:900}.sensor-btn.active{border-color:var(--accent2);box-shadow:0 0 0 2px #6ee7a826}
+  .readings{display:grid;grid-template-columns:1fr 1fr;gap:8px}.reading{background:#0e1d26;border:1px solid var(--line);border-radius:10px;padding:10px;min-width:0}
+  .reading .k{font-size:10px;text-transform:uppercase;color:var(--muted);letter-spacing:.6px;font-weight:900}.reading .v{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:20px;font-weight:900;margin-top:4px}.reading .u{font-size:12px;color:var(--muted)}
+  .pipeline{display:grid;gap:8px}.step{border:1px solid var(--line);background:#0e1d26;border-radius:10px;padding:9px}.step b{display:block;font-size:11px;color:var(--accent2);text-transform:uppercase;letter-spacing:.6px}.step span{display:block;margin-top:4px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:#dce9e1;line-height:1.4}
+  .radar-row{display:grid;grid-template-columns:126px 1fr;gap:12px;align-items:center}#radar{width:126px;height:126px;border-radius:50%;background:#03080d;border:1px solid var(--line)}
+  .forecast{display:grid;gap:7px}.forecast strong{font-size:18px}.forecast span{color:var(--muted);font-size:12.5px;line-height:1.4}
+  .log{display:grid;gap:6px;max-height:185px;overflow:auto}.log-row{display:grid;grid-template-columns:54px 1fr auto;gap:8px;align-items:center;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;background:#0e1d26;border:1px solid #1c3542;border-radius:8px;padding:7px}.log-row span:nth-child(2){color:#dbe9e1}.log-row span:last-child{color:var(--accent2);font-weight:900}
+  .quality{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}.dot{width:10px;height:10px;border-radius:50%;background:var(--good);box-shadow:0 0 12px var(--good)}
+  .toast{position:fixed;right:16px;bottom:16px;z-index:20;background:#061016e8;border:1px solid var(--line);border-radius:12px;padding:10px 12px;color:var(--ink);font-size:13px;opacity:0;transform:translateY(8px);transition:.2s;pointer-events:none}.toast.show{opacity:1;transform:translateY(0)}
+  @media (max-width:1100px){
+    body{overflow:auto}.app{height:auto;min-height:100dvh;grid-template-columns:minmax(0,1fr);grid-template-rows:auto 560px auto auto;grid-template-areas:"header" "scene" "controls" "telemetry";width:100%;max-width:100vw;overflow-x:hidden}.controls,.telemetry{border:0;border-bottom:1px solid var(--line)}.scene-wrap{min-height:560px}.telemetry{display:grid;grid-template-columns:1fr 1fr}.telemetry .wide{grid-column:1/-1}
+  }
+  @media (max-width:620px){
+    html,body{width:100%;max-width:100%;overflow-x:hidden}
+    .app,header,.controls,.telemetry,.scene-wrap,.card{min-width:0;width:100%;max-width:100vw}
+    header{gap:8px;padding-inline:10px;overflow:hidden}.brand{flex:1 1 auto}.chip{display:none}.top-actions{flex:0 0 auto;gap:6px}.top-actions .btn{padding:0 10px}.top-actions .btn span{display:none}.controls,.telemetry{padding:10px}.presets,.readings,.telemetry{grid-template-columns:minmax(0,1fr)}.scene-wrap{min-height:460px;overflow:hidden}.scene-tip{right:10px;left:10px;max-width:none}.scene-status{left:10px;right:10px}.radar-row{grid-template-columns:minmax(0,1fr)}#scene{width:100%;max-width:100%}#radar{justify-self:center}.status-pill{font-size:11px;max-width:100%}.log-row{grid-template-columns:48px minmax(0,1fr);}.log-row span:last-child{grid-column:2}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="brand">
+      <b>Estacion meteorologica inmersiva</b>
+      <span>Clima visible, sensores activos, datalogger y pronostico local</span>
+    </div>
+    <span class="chip"><b>Modelo:</b> estacion automatica</span>
+    <span class="chip"><b>Objetivo:</b> clima → sensor → dato</span>
+    <div class="sp"></div>
+    <div class="top-actions">
+      <button class="btn primary" id="btn-tour"><span>Recorrido</span> guiado</button>
+      <button class="iconbtn" id="btn-export" title="Descargar datos CSV" aria-label="Descargar datos CSV">⇩</button>
+    </div>
+  </header>
+
+  <aside class="controls">
+    <section class="card">
+      <h2>Escenarios climaticos</h2>
+      <div class="presets" id="presets"></div>
+    </section>
+
+    <section class="card">
+      <h2>Control de clima</h2>
+      <div id="sliders"></div>
+    </section>
+
+    <section class="card">
+      <h2>Sensores de la estacion</h2>
+      <div class="sensor-list" id="sensor-list"></div>
+    </section>
+  </aside>
+
+  <main class="scene-wrap" aria-label="Escena 3D de estacion meteorologica">
+    <canvas id="scene"></canvas>
+    <div class="scene-tip">
+      <b id="scene-title">Estacion en ambiente rural</b>
+      <span id="scene-copy">Ajusta el clima y observa como cada fenomeno impacta sensores, senales crudas, procesamiento y datos guardados.</span>
+    </div>
+    <div class="scene-status" id="scene-status"></div>
+  </main>
+
+  <aside class="telemetry">
+    <section class="card wide">
+      <h2>Lecturas recibidas</h2>
+      <div class="readings" id="readings"></div>
+    </section>
+
+    <section class="card wide">
+      <h2>Cadena de medicion</h2>
+      <div class="pipeline" id="pipeline"></div>
+    </section>
+
+    <section class="card">
+      <h2>Radar local</h2>
+      <div class="radar-row">
+        <canvas id="radar" width="180" height="180"></canvas>
+        <div class="forecast">
+          <strong id="forecast-title">Estable</strong>
+          <span id="forecast-copy">Sin senales de cambio brusco en el corto plazo.</span>
+          <div class="quality"><i class="dot"></i><span id="quality">Datos validos · 0 alertas</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Registro del datalogger</h2>
+      <div class="log" id="log"></div>
+    </section>
+  </aside>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const fmt=(v,d=0)=>Number(v).toFixed(d);
+const dirName=(deg)=>['N','NE','E','SE','S','SO','O','NO'][Math.round((((deg%360)+360)%360)/45)%8];
+
+const sensors={
+  overview:{label:'Sistema completo',icon:'◎',kind:'todo',desc:'La estacion integra sensores, energia, datalogger y telemetria. El valor educativo esta en ver como cada fenomeno se transforma en datos.'},
+  thermo:{label:'Temp / humedad',icon:'🌡',kind:'analogico',desc:'El abrigo protege el sensor del sol directo para medir aire real. Temperatura y humedad alimentan VPD, riesgo de condensacion y confort del cultivo.'},
+  wind:{label:'Viento',icon:'↗',kind:'pulsos',desc:'El anemometro genera pulsos segun velocidad y la veleta entrega direccion. La escena muestra flujo, giro y orientacion.'},
+  rain:{label:'Lluvia',icon:'☔',kind:'eventos',desc:'El pluviometro de balancin convierte gotas en eventos discretos. La intensidad se estima por frecuencia y el acumulado por conteo.'},
+  radiation:{label:'Radiacion',icon:'☀',kind:'mV',desc:'El piranometro mide energia solar incidente. Nubes y hora del dia reducen radiacion y cambian la lectura.'},
+  pressure:{label:'Presion',icon:'↕',kind:'I2C',desc:'El barometro en el gabinete registra tendencia de presion. Caidas sostenidas combinadas con humedad anticipan inestabilidad.'},
+  logger:{label:'Datalogger',icon:'▣',kind:'edge',desc:'La base toma muestras, calibra, filtra, asigna unidades, marca calidad y guarda cada paquete para exportar.'}
+};
+const sensorOrder=['overview','thermo','wind','rain','radiation','pressure','logger'];
+
+const presets={
+  claro:{label:'Dia despejado',env:{hour:13,wind:12,dir:75,rain:0,clouds:10,tempBase:23,pressureTrend:0.4}},
+  tormenta:{label:'Tormenta entrando',env:{hour:16,wind:48,dir:225,rain:32,clouds:88,tempBase:20,pressureTrend:-0.9}},
+  calor:{label:'Ola de calor',env:{hour:14,wind:8,dir:20,rain:0,clouds:5,tempBase:35,pressureTrend:0.1}},
+  noche:{label:'Noche humeda',env:{hour:3,wind:6,dir:160,rain:2,clouds:55,tempBase:14,pressureTrend:-0.1}},
+  frente:{label:'Frente frio',env:{hour:10,wind:62,dir:250,rain:12,clouds:78,tempBase:11,pressureTrend:-0.6}},
+  calma:{label:'Calma brumosa',env:{hour:7,wind:2,dir:90,rain:0,clouds:65,tempBase:16,pressureTrend:0}}
+};
+
+const sliderDefs=[
+  ['hour','Hora',0,24,0.1,v=>`${String(Math.floor(v)).padStart(2,'0')}:${String(Math.floor((v%1)*60)).padStart(2,'0')}`],
+  ['wind','Viento',0,100,1,v=>`${fmt(v)} km/h`],
+  ['dir','Direccion',0,360,1,v=>`${fmt(v)}° ${dirName(v)}`],
+  ['rain','Lluvia',0,60,0.5,v=>`${fmt(v,1)} mm/h`],
+  ['clouds','Nubes',0,100,1,v=>`${fmt(v)} %`],
+  ['tempBase','Temp. base',-10,45,0.5,v=>`${fmt(v,1)} °C`],
+  ['pressureTrend','Tend. presion',-1,1,0.05,v=>v>0.1?`sube ${fmt(v,2)}`:v<-0.1?`baja ${fmt(v,2)}`:'estable']
+];
+
+const state={...presets.claro.env};
+let selected='overview',activePreset='claro',tourIndex=0,log=[],rainAccum=0,lastLog=0,lastT=0,mouse={x:0,y:0},hover=null;
+const motion={cloud:0,wind:0,rain:0,cups:0,radar:0,signal:0,gust:0};
+
+const scene=document.getElementById('scene'),ctx=scene.getContext('2d');
+const radar=document.getElementById('radar'),rctx=radar.getContext('2d');
+
+function derived(){
+  const sunAngle=(state.hour-6)/12*Math.PI;
+  const sunRaw=Math.sin(sunAngle);
+  const sun=clamp(sunRaw,0,1)*(1-state.clouds/130);
+  const radiation=Math.max(0,sun*1050);
+  const temp=state.tempBase + sun*7 - state.rain*0.08 - state.wind*0.035;
+  const humidity=clamp(46 + state.clouds*0.35 + state.rain*1.05 - sun*14 - Math.max(0,temp-26)*0.8,12,98);
+  const pressure=1013 + state.pressureTrend*7 - state.rain*0.22 + sun*1.1;
+  const dew=temp-(100-humidity)/5;
+  const quality=[];
+  if(state.wind>65) quality.push('rafagas');
+  if(state.rain>40) quality.push('lluvia intensa');
+  if(radiation<8 && state.hour>8 && state.hour<17 && state.clouds<30) quality.push('radiacion sospechosa');
+  return {sun,radiation,temp,humidity,pressure,dew,wind:state.wind,dir:state.dir,rain:state.rain,clouds:state.clouds,quality};
+}
+
+function sensorPipeline(id,d){
+  const map={
+    overview:['Fenomenos simultaneos','sensores activos','paquete ambiental completo','datos sincronizados cada 2 s'],
+    thermo:[`NTC ${fmt(10000*Math.exp(-(d.temp-25)/38))} Ω + HR capacitiva`, 'compensacion por radiacion y ventilacion del abrigo', `${fmt(d.temp,1)} °C · ${fmt(d.humidity)} % HR`, 'valida rangos fisicos y deriva lenta'],
+    wind:[`${fmt(d.wind*0.72,1)} Hz en anemometro · veleta ${fmt(d.dir)}°`, 'conteo de pulsos + promedio movil 10 s', `${fmt(d.wind,1)} km/h desde ${dirName(d.dir)}`, d.wind>65?'alerta por rafagas':'senal estable'],
+    rain:[`${fmt(d.rain/12,2)} vuelcos/s estimados`, 'conteo por interrupcion y conversion 0.2 mm/vuelco', `${fmt(d.rain,1)} mm/h · acum. ${fmt(rainAccum,2)} mm`, d.rain>40?'intensidad alta':'sin saturacion'],
+    radiation:[`${fmt(d.radiation*0.011,2)} mV del piranometro`, 'ADC 16 bits + correccion por nubosidad/sombra', `${fmt(d.radiation)} W/m2`, d.radiation<50?'baja radiacion':'lectura consistente'],
+    pressure:[`${fmt(d.pressure,1)} hPa por sensor digital`, 'filtro lento + tendencia 15 min', `${fmt(d.pressure,1)} hPa`, state.pressureTrend<-0.45?'caida relevante':'tendencia normal'],
+    logger:['muestras T/HR/P/viento/lluvia/radiacion', 'calibracion, timestamp, flags y memoria local', 'paquete CSV + pronostico simple', 'listo para telemetria/exportacion']
+  };
+  return map[id]||map.overview;
+}
+
+function updateUI(){
+  const d=derived();
+  document.getElementById('scene-title').textContent=sensors[selected].label;
+  document.getElementById('scene-copy').textContent=sensors[selected].desc;
+  document.getElementById('scene-status').innerHTML=[
+    ['Hora',sliderDefs[0][5](state.hour)],['Viento',`${fmt(d.wind)} km/h ${dirName(d.dir)}`],['Lluvia',`${fmt(d.rain,1)} mm/h`],['Nubes',`${fmt(d.clouds)} %`]
+  ].map(([k,v])=>`<span class="status-pill"><strong>${k}:</strong> ${v}</span>`).join('');
+  document.getElementById('readings').innerHTML=[
+    ['Temperatura',fmt(d.temp,1),'°C'],['Humedad',fmt(d.humidity),'%'],['Presion',fmt(d.pressure,1),'hPa'],['Viento',fmt(d.wind,1),'km/h'],['Lluvia',fmt(d.rain,1),'mm/h'],['Radiacion',fmt(d.radiation),'W/m2']
+  ].map(r=>`<div class="reading"><div class="k">${r[0]}</div><div><span class="v">${r[1]}</span> <span class="u">${r[2]}</span></div></div>`).join('');
+  const pipe=sensorPipeline(selected,d);
+  document.getElementById('pipeline').innerHTML=[
+    ['Fenomeno / señal cruda',pipe[0]],['Procesamiento',pipe[1]],['Dato registrado',pipe[2]],['Calidad / accion',pipe[3]]
+  ].map(s=>`<div class="step"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('');
+  const fc=forecast(d);
+  document.getElementById('forecast-title').textContent=fc.title;
+  document.getElementById('forecast-copy').textContent=fc.copy;
+  document.getElementById('quality').textContent=d.quality.length?`Revisar: ${d.quality.join(', ')}`:'Datos validos · 0 alertas';
+  document.querySelector('.dot').style.background=d.quality.length?'var(--warn)':'var(--good)';
+  document.querySelector('.dot').style.boxShadow=d.quality.length?'0 0 12px var(--warn)':'0 0 12px var(--good)';
+  document.querySelectorAll('.sensor-btn').forEach(b=>b.classList.toggle('active',b.dataset.sensor===selected));
+  document.querySelectorAll('.preset').forEach(b=>b.classList.toggle('active',b.dataset.preset===activePreset));
+}
+
+function forecast(d){
+  if(d.rain>25 || (d.pressure<1008 && d.humidity>75)) return {title:'Lluvia probable',copy:'Presion baja, humedad alta y eco de lluvia activo. El sistema espera precipitacion en el corto plazo.'};
+  if(d.wind>55) return {title:'Alerta de viento',copy:'El anemometro registra rafagas fuertes. Conviene revisar fijaciones y calidad de datos de lluvia.'};
+  if(d.radiation>850 && d.humidity<40) return {title:'Despejado y seco',copy:'Alta radiacion y baja humedad. Aumenta demanda evaporativa y baja riesgo de lluvia.'};
+  if(state.clouds>70 && state.pressureTrend<-.35) return {title:'Inestabilidad en aumento',copy:'Nubosidad alta y presion en descenso sugieren frente o tormenta cercana.'};
+  return {title:'Estable',copy:'Las variables no muestran cambios bruscos. Pronostico local sin alertas inmediatas.'};
+}
+
+function buildControls(){
+  document.getElementById('presets').innerHTML=Object.entries(presets).map(([id,p])=>`<button class="preset" data-preset="${id}">${p.label}</button>`).join('');
+  document.getElementById('sliders').innerHTML=sliderDefs.map(([id,label,min,max,step,format])=>`
+    <div class="control">
+      <label for="in-${id}"><span>${label}</span><output id="out-${id}">${format(state[id])}</output></label>
+      <input id="in-${id}" data-key="${id}" type="range" min="${min}" max="${max}" step="${step}" value="${state[id]}" aria-label="${label}">
+    </div>`).join('');
+  document.getElementById('sensor-list').innerHTML=sensorOrder.map(id=>`<button class="sensor-btn" data-sensor="${id}"><b>${sensors[id].icon} ${sensors[id].label}</b><span>${sensors[id].kind}</span></button>`).join('');
+  document.querySelectorAll('[data-key]').forEach(input=>input.addEventListener('input',()=>{
+    state[input.dataset.key]=parseFloat(input.value); activePreset='manual'; syncControls(); updateUI();
+  }));
+  document.querySelectorAll('[data-preset]').forEach(btn=>btn.addEventListener('click',()=>applyPreset(btn.dataset.preset)));
+  document.querySelectorAll('[data-sensor]').forEach(btn=>btn.addEventListener('click',()=>{selected=btn.dataset.sensor;updateUI();revealScene();}));
+}
+function syncControls(){
+  sliderDefs.forEach(([id,,,,,format])=>{
+    const input=document.getElementById(`in-${id}`), out=document.getElementById(`out-${id}`);
+    if(input) input.value=state[id];
+    if(out) out.textContent=format(state[id]);
+  });
+}
+function applyPreset(id){
+  Object.assign(state,presets[id].env); activePreset=id; syncControls(); updateUI(); toast(`Escenario: ${presets[id].label}`); revealScene();
+}
+function revealScene(){
+  if(matchMedia('(max-width: 1100px)').matches) document.querySelector('.scene-wrap').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function resize(){
+  const dpr=Math.min(devicePixelRatio||1,2), r=scene.getBoundingClientRect();
+  scene.width=Math.max(2,Math.round(r.width*dpr)); scene.height=Math.max(2,Math.round(r.height*dpr));
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+}
+function project(x,y,z){
+  const w=scene.clientWidth,h=scene.clientHeight,scale=Math.min(w,h)*0.000024;
+  const yaw=-0.72,cy=Math.cos(yaw),sy=Math.sin(yaw);
+  const rx=x*cy-y*sy, ry=x*sy+y*cy;
+  return {x:w/2+rx*scale*70,y:h*0.68+ry*scale*32-z*scale*70};
+}
+function drawScene(m){
+  const w=scene.clientWidth,h=scene.clientHeight,d=derived();
+  const day=d.sun,night=1-day;
+  const sky=ctx.createLinearGradient(0,0,0,h);
+  sky.addColorStop(0,`rgb(${Math.round(10+35*day)},${Math.round(20+85*day)},${Math.round(34+130*day)})`);
+  sky.addColorStop(1,`rgb(${Math.round(5+20*day)},${Math.round(18+55*day)},${Math.round(22+35*day)})`);
+  ctx.fillStyle=sky;ctx.fillRect(0,0,w,h);
+  drawSunMoon(w,h,d,m); drawHills(w,h,d); drawWeatherLayer(w,h,d,m);
+  const items=[];
+  addTerrain(items); addStation(items,d,m); addSensorSignals(items,d,m);
+  items.sort((a,b)=>a.depth-b.depth).forEach(i=>i.draw());
+  drawHitLabels(d);
+}
+function drawSunMoon(w,h,d,m){
+  const sx=w*(0.15+0.7*(state.hour/24)), sy=h*(0.22-0.16*d.sun);
+  const cover=d.clouds/100, sunAlpha=d.sun>0.05?clamp(0.22+0.72*(1-cover),0.18,0.95):0.55;
+  ctx.fillStyle=d.sun>0.05?'#ffdd69':'#dbe8ff'; ctx.globalAlpha=sunAlpha;
+  ctx.beginPath();ctx.arc(sx,sy,d.sun>0.05?26:18,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;
+  if(d.clouds>8){ctx.fillStyle=`rgba(180,205,216,${0.14+d.clouds/210})`;for(let i=0;i<7;i++){const x=(i*190+m.cloud)%(w+260)-140;cloud(x,70+i%3*28,46+i%4*8);}}
+}
+function cloud(x,y,r){ctx.beginPath();ctx.arc(x,y,r*.55,0,7);ctx.arc(x+r*.5,y-r*.15,r*.45,0,7);ctx.arc(x+r,y,r*.6,0,7);ctx.arc(x+r*.45,y+r*.18,r*.55,0,7);ctx.fill();}
+function drawHills(w,h,d){ctx.fillStyle=`rgba(30,80,58,${0.55+0.2*d.sun})`;ctx.beginPath();ctx.moveTo(0,h*.56);for(let x=0;x<=w;x+=80)ctx.lineTo(x,h*.54+Math.sin(x*.011)*22);ctx.lineTo(w,h);ctx.lineTo(0,h);ctx.fill();}
+function drawWeatherLayer(w,h,d,m){
+  const windA=state.dir*Math.PI/180, vx=Math.cos(windA), vy=Math.sin(windA);
+  if(d.clouds>70){ctx.fillStyle=`rgba(4,11,18,${(d.clouds-70)/95})`;ctx.fillRect(0,0,w,h);}
+  ctx.strokeStyle=`rgba(130,220,255,${clamp(d.wind/130,.06,.34)})`;ctx.lineWidth=1.4;
+  for(let i=0;i<18;i++){const base=(i*86+m.wind)%(w+180)-90;const y=105+(i%8)*46+Math.sin(m.gust+i)*7;ctx.beginPath();ctx.moveTo(base,y);ctx.bezierCurveTo(base+34*vx,y+14*vy,base+74*vx,y-14*vy,base+124*vx,y);ctx.stroke();}
+  if(d.clouds>58&&d.rain<8&&d.wind<16){ctx.strokeStyle=`rgba(210,232,226,${clamp((d.clouds-52)/180,.05,.24)})`;ctx.lineWidth=12;ctx.lineCap='round';for(let i=0;i<7;i++){const y=h*.48+i*31+Math.sin(m.gust*.7+i)*5;const x=(m.cloud*.35+i*150)%(w+260)-130;ctx.beginPath();ctx.moveTo(x,y);ctx.bezierCurveTo(x+70,y-9,x+150,y+9,x+230,y);ctx.stroke();}}
+  if(d.rain>0){ctx.strokeStyle=`rgba(110,195,255,${clamp(d.rain/85,.16,.58)})`;ctx.lineWidth=1;const drops=Math.min(125,Math.round(14+d.rain*1.75));for(let i=0;i<drops;i++){const x=(i*53+m.wind*.55)%(w+100)-50;const y=(i*97+m.rain)%(h+90)-45;const len=17+Math.min(12,d.rain*.22);ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x-7*vx,y+len);ctx.stroke();}}
+}
+function addTerrain(items){items.push({depth:-1200,draw(){const p=project(0,0,0);ctx.fillStyle='#214a31';ctx.beginPath();ctx.ellipse(p.x,p.y,330,150,0,0,7);ctx.fill();ctx.strokeStyle='#3b7850';ctx.lineWidth=2;ctx.stroke();for(let i=-4;i<=4;i++){const a=project(i*40,-80,1),b=project(i*40,90,1);ctx.strokeStyle='#2b5a3d';ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}}});}
+function addBox(items,x,y,z,w,l,h,top,side){items.push({depth:y+x*.15-z*.01,draw(){const p=project(x,y,z);ctx.fillStyle=side;ctx.fillRect(p.x-w/2,p.y-h,w,h);ctx.fillStyle=top;ctx.fillRect(p.x-w/2,p.y-h,w,Math.max(8,h*.22));ctx.strokeStyle='#0008';ctx.strokeRect(p.x-w/2,p.y-h,w,h);}});}
+function addStation(items,d,m){
+  addBox(items,0,0,0,64,64,18,'#8ca79c','#526b64');
+  items.push({depth:0,draw(){const b=project(0,0,8),top=project(0,0,190);ctx.strokeStyle='#d6e1dc';ctx.lineWidth=7;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(b.x,b.y);ctx.lineTo(top.x,top.y);ctx.stroke();}});
+  addBox(items,10,16,78,46,34,58,'#dfe8e4','#7e9590');
+  addBox(items,-28,-16,118,64,30,10,'#1b6d96','#0d354d');
+  addBox(items,18,-14,120,34,28,34,'#f2f5f2','#cbd3cf');
+  addBox(items,0,-50,150,58,28,24,'#e6edf0','#9ba7ad');
+  items.push({depth:-20,draw(){const a=project(-70,0,206),b=project(70,0,206);ctx.strokeStyle='#dce8e2';ctx.lineWidth=6;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();drawAnemometer(a.x,a.y,d,m);drawVane(b.x,b.y,d);}});
+  addBox(items,58,20,72,34,30,46,'#dfe8e4','#8d9d9a');
+}
+function drawAnemometer(x,y,d,m){ctx.save();ctx.translate(x,y);ctx.strokeStyle='#f06d5c';ctx.fillStyle='#f06d5c';ctx.lineWidth=2;for(let i=0;i<3;i++){const a=m.cups+i*Math.PI*2/3;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(Math.cos(a)*24,Math.sin(a)*10);ctx.stroke();ctx.beginPath();ctx.arc(Math.cos(a)*28,Math.sin(a)*12,5,0,7);ctx.fill();}ctx.restore();}
+function drawVane(x,y,d){const a=state.dir*Math.PI/180-0.7;ctx.save();ctx.translate(x,y);ctx.rotate(a);ctx.strokeStyle='#ffcc44';ctx.fillStyle='#ffcc44';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-26,0);ctx.lineTo(26,0);ctx.stroke();ctx.beginPath();ctx.moveTo(26,0);ctx.lineTo(13,-8);ctx.lineTo(13,8);ctx.fill();ctx.restore();}
+function addSensorSignals(items,d,m){items.push({depth:1200,draw(){const ids=selected==='overview'?['thermo','wind','rain','radiation','pressure']:selected==='logger'?['thermo','wind','rain','radiation','pressure']:[selected];ids.forEach((id,i)=>drawSignal(id,d,m.signal+i*7));}});}
+function drawSignal(id,d,phase){const pts={thermo:[project(18,-14,140),project(58,20,105)],wind:[project(0,0,210),project(58,20,105)],rain:[project(0,-50,162),project(58,20,105)],radiation:[project(-28,-16,130),project(58,20,105)],pressure:[project(10,16,106),project(58,20,105)]};if(!pts[id])return;const [a,b]=pts[id];ctx.strokeStyle=id===selected||selected==='overview'?'rgba(110,231,168,.8)':'rgba(66,213,255,.35)';ctx.lineWidth=id===selected?3:2;ctx.setLineDash([8,7]);ctx.lineDashOffset=-phase;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.quadraticCurveTo((a.x+b.x)/2,a.y-45,b.x,b.y);ctx.stroke();ctx.setLineDash([]);}
+function drawHitLabels(d){const ids=['thermo','wind','rain','radiation','pressure','logger'];const pos={thermo:project(18,-14,147),wind:project(0,0,220),rain:project(0,-50,178),radiation:project(-28,-16,138),pressure:project(10,16,118),logger:project(58,20,123)};ids.forEach(id=>{const p=pos[id],active=id===selected;ctx.fillStyle=active?'#6ee7a8':'rgba(8,18,24,.78)';ctx.strokeStyle=active?'#d8ffe8':'#42d5ff88';ctx.lineWidth=1.5;ctx.beginPath();ctx.roundRect(p.x-15,p.y-15,30,30,8);ctx.fill();ctx.stroke();ctx.fillStyle=active?'#052012':'#edf7f1';ctx.font='16px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(sensors[id].icon,p.x,p.y);});}
+
+function drawRadar(m){
+  const w=radar.width,h=radar.height,cx=w/2,cy=h/2,d=derived();
+  rctx.clearRect(0,0,w,h);rctx.fillStyle='#041017';rctx.fillRect(0,0,w,h);
+  rctx.strokeStyle='#183744';rctx.lineWidth=1;for(let r=28;r<86;r+=28){rctx.beginPath();rctx.arc(cx,cy,r,0,7);rctx.stroke();}rctx.beginPath();rctx.moveTo(cx,0);rctx.lineTo(cx,h);rctx.moveTo(0,cy);rctx.lineTo(w,cy);rctx.stroke();
+  if(d.rain>0||state.clouds>40){const a=m.radar*.18+state.dir*Math.PI/180,dist=26+state.clouds*.42;const x=cx+Math.cos(a)*dist,y=cy+Math.sin(a)*dist;rctx.fillStyle=d.rain>25?'rgba(255,110,80,.38)':'rgba(90,220,120,.38)';rctx.beginPath();rctx.ellipse(x,y,16+d.rain*.55,11+d.rain*.32,a,0,7);rctx.fill();}
+  const sweep=m.radar;rctx.fillStyle='rgba(66,213,255,.18)';rctx.beginPath();rctx.moveTo(cx,cy);rctx.arc(cx,cy,86,sweep,sweep+.42);rctx.fill();rctx.fillStyle='#edf7f1';rctx.beginPath();rctx.arc(cx,cy,3,0,7);rctx.fill();
+}
+
+function addLog(now){
+  const d=derived(); if(now-lastLog<2000)return; lastLog=now;
+  const id=selected==='overview'?'logger':selected; const pipe=sensorPipeline(id,d);
+  log.unshift({time:new Date().toLocaleTimeString().slice(0,8),sensor:sensors[id].label,value:pipe[2],quality:pipe[3]});
+  log=log.slice(0,24);
+  document.getElementById('log').innerHTML=log.map(r=>`<div class="log-row"><span>${r.time}</span><span>${r.sensor}</span><span>${r.value}</span></div>`).join('');
+}
+
+function loop(t){
+  if(!lastT)lastT=t; const dt=Math.min(.08,(t-lastT)/1000); lastT=t;
+  const d=derived();
+  rainAccum+=state.rain/3600*dt;
+  motion.cloud=(motion.cloud+dt*(4+d.wind*.06))%2000;
+  motion.wind=(motion.wind+dt*(10+d.wind*.45))%2000;
+  motion.rain=(motion.rain+dt*(115+d.rain*2.1+d.wind*.35))%2000;
+  motion.cups+=dt*(0.45+d.wind*.13);
+  motion.radar=(motion.radar+dt*.42)%(Math.PI*2);
+  motion.signal=(motion.signal+dt*18)%60;
+  motion.gust+=dt*.55;
+  drawScene(motion); drawRadar(motion); addLog(t); requestAnimationFrame(loop);
+}
+
+function exportCSV(){
+  if(!log.length){toast('Todavia no hay muestras registradas.');return;}
+  const rows=['hora,sensor,dato,calidad',...log.map(r=>`"${r.time}","${r.sensor}","${r.value}","${r.quality}"`)];
+  const blob=new Blob([rows.join('\n')],{type:'text/csv'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=url;a.download='registro-estacion-meteorologica.csv';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);toast('CSV descargado.');
+}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.classList.remove('show'),2200);}
+
+function guidedTour(){const seq=['overview','radiation','thermo','wind','rain','pressure','logger'];selected=seq[tourIndex++%seq.length];updateUI();revealScene();toast(`Recorrido: ${sensors[selected].label}`);}
+
+scene.addEventListener('pointermove',e=>{mouse={x:e.offsetX,y:e.offsetY};});
+scene.addEventListener('click',e=>{const d=derived();const positions={thermo:project(18,-14,147),wind:project(0,0,220),rain:project(0,-50,178),radiation:project(-28,-16,138),pressure:project(10,16,118),logger:project(58,20,123)};let best=null,bestD=999;for(const id in positions){const p=positions[id],dist=Math.hypot(e.offsetX-p.x,e.offsetY-p.y);if(dist<bestD){best=id;bestD=dist;}}if(best&&bestD<36){selected=best;updateUI();}});
+
+window.addEventListener('resize',resize);
+document.getElementById('btn-export').addEventListener('click',exportCSV);
+document.getElementById('btn-tour').addEventListener('click',guidedTour);
+
+buildControls();syncControls();resize();updateUI();requestAnimationFrame(loop);
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{
+  "name": "curza-stic-simuladores",
+  "version": "1.0.0",
+  "description": "Suite de simuladores educativos interactivos offline del Seminario de TIC - CURZA / Universidad Nacional del Comahue",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve .",
+    "audit": "node .gitnexus/run.cjs analyze --index-only",
+    "test": "echo \"Todos los simuladores son offline y autocontenidos.\""
+  },
+  "keywords": [
+    "simuladores",
+    "tic",
+    "curza",
+    "dron",
+    "arduino",
+    "iot",
+    "meteorologia",
+    "seguridad",
+    "ia",
+    "sig",
+    "qgis"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@anthropic-ai/claude-code": "^2.1.288",
+    "gitnexus": "^1.6.12",
+    "omniroute": "^3.8.51"
+  }
+}

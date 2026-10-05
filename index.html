@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#070e13">
+<title>Simuladores TIC · Seminario de Tecnología e Innovación</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     PORTAL DE SIMULADORES EDUCATIVOS TIC - CURZA / UNCo
+     Diseño Ultra-Moderno, Glassmorphism, Carruseles Horizontales
+     con rueda de mouse + Modo Acordeón Interactivo.
+     100% Autocontenido, Offline y Responsive.
+     ============================================================ */
+  :root {
+    --bg-main: #060b10;
+    --bg-surface: #0a131b;
+    --bg-glass: rgba(14, 25, 36, 0.72);
+    --bg-card: rgba(16, 29, 42, 0.85);
+    --bg-card-hover: rgba(22, 39, 58, 0.95);
+    --line: rgba(56, 88, 120, 0.35);
+    --line-glow: rgba(66, 213, 255, 0.4);
+    
+    --ink: #f0f7f4;
+    --muted: #95acc0;
+    --dim: #5c7890;
+    
+    /* Acentos por categoría */
+    --c-dron: #38bdf8;
+    --c-robo: #10b981;
+    --c-iot: #f59e0b;
+    --c-meteo: #06b6d4;
+    --c-ofi: #a855f7;
+    --c-ref: #eab308;
+    --c-lab: #14b8a6;
+    --c-bi: #8b5cf6;
+    --c-segu: #f43f5e;
+    --c-bd: #f97316;
+    --c-ia: #00f2fe;
+    --c-moodle: #fb923c;
+    --c-eje: #6366f1;
+    --c-alt: #64748b;
+    
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --radius-full: 9999px;
+    --header-h: 92px;
+  }
+
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  
+  html {
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+    scroll-padding-top: var(--header-h);
+    font-synthesis: none;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background-color: var(--bg-main);
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.12) 0px, transparent 45%),
+      radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.10) 0px, transparent 40%),
+      radial-gradient(at 50% 50%, rgba(168, 85, 247, 0.05) 0px, transparent 55%),
+      linear-gradient(180deg, #060b10 0%, #09131c 100%);
+    background-attachment: fixed;
+    color: var(--ink);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; }
+
+  /* ---------- TOP NAVBAR MINIMALISTA ---------- */
+  .app-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(6, 11, 16, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--line);
+    padding: 10px 18px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .nav-bar {
+    max-width: 1320px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    user-select: none;
+    flex-shrink: 0;
+  }
+
+  .brand-ico {
+    font-size: 22px;
+    line-height: 1;
+    filter: drop-shadow(0 2px 6px rgba(56, 189, 248, 0.4));
+  }
+
+  .brand h1 {
+    margin: 0;
+    font-family: 'Outfit', sans-serif;
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: -0.2px;
+    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .brand-pill {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: var(--c-dron);
+    background: rgba(56, 189, 248, 0.12);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: var(--radius-full);
+    padding: 2px 8px;
+  }
+
+  .search-box {
+    position: relative;
+    flex: 1;
+    min-width: 200px;
+    max-width: 440px;
+  }
+
+  .search-box input {
+    width: 100%;
+    background: rgba(14, 25, 36, 0.65);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-full);
+    padding: 7px 14px 7px 36px;
+    font-size: 13px;
+    color: var(--ink);
+    outline: none;
+    transition: all 0.2s ease;
+  }
+
+  .search-box input:focus {
+    border-color: var(--c-dron);
+    box-shadow: 0 0 14px rgba(56, 189, 248, 0.25);
+    background: rgba(18, 33, 48, 0.95);
+  }
+
+  .search-box .search-ico {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--dim);
+    font-size: 14px;
+    pointer-events: none;
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .btn-dock {
+    background: rgba(14, 25, 36, 0.6);
+    border: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.18s ease;
+  }
+
+  .btn-dock:hover {
+    color: var(--ink);
+    border-color: var(--c-dron);
+    background: rgba(56, 189, 248, 0.1);
+  }
+
+  /* Carrusel de Píldoras de Categoría */
+  .pills-bar {
+    max-width: 1320px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 2px;
+  }
+
+  .pills-bar::-webkit-scrollbar { display: none; }
+
+  .pill {
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    background: rgba(14, 25, 36, 0.45);
+    border: 1px solid var(--line);
+    padding: 5px 11px;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.18s ease;
+    user-select: none;
+  }
+
+  .pill:hover, .pill.active {
+    color: var(--ink);
+    border-color: var(--accent-color, var(--c-dron));
+    background: rgba(56, 189, 248, 0.14);
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.12);
+  }
+
+  /* ---------- CONTENIDO PRINCIPAL ---------- */
+  .main-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 16px 20px 48px;
+  }
+
+  /* ---------- SECCIÓN ACORDEÓN / CARRUSEL (ENCUADRE COMPLETO 100% VIEWPORT) ---------- */
+  .catalog-sec {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    min-height: calc(100dvh - var(--header-h) - 24px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 24px;
+    background: rgba(10, 19, 28, 0.55);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 24px 28px;
+    backdrop-filter: blur(12px);
+    transition: border-color 0.25s, box-shadow 0.25s;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .catalog-sec.collapsed {
+    height: auto !important;
+    min-height: unset !important;
+    max-height: unset !important;
+    scroll-snap-align: none;
+    padding: 18px 24px;
+  }
+
+  @media (max-height: 580px) {
+    .catalog-sec {
+      min-height: unset;
+      height: auto;
+    }
+  }
+
+  .catalog-sec::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--c, var(--c-dron));
+    opacity: 0.85;
+    border-radius: 4px 0 0 4px;
+  }
+
+  .catalog-sec:hover {
+    border-color: rgba(66, 213, 255, 0.3);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Encabezado de la sección */
+  .sec-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .sec-title-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .sec-title-group h2 {
+    margin: 0;
+    font-family: 'Outfit', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tag-cat {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    font-weight: 700;
+    color: var(--c, var(--c-dron));
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--c, var(--c-dron));
+    border-radius: var(--radius-full);
+    padding: 3px 10px;
+  }
+
+  .tag-count {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    background: rgba(0, 0, 0, 0.25);
+    padding: 3px 8px;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* Controles del carrusel y acordeón */
+  .sec-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .arrow-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    font-size: 15px;
+    transition: all 0.15s ease;
+  }
+
+  .arrow-btn:hover {
+    background: var(--c, var(--c-dron));
+    color: #050b10;
+    border-color: var(--c, var(--c-dron));
+    transform: scale(1.08);
+    box-shadow: 0 0 12px var(--c, var(--c-dron));
+  }
+
+  .arrow-btn:active { transform: scale(0.94); }
+
+  .toggle-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--muted);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    font-size: 13px;
+    transition: transform 0.25s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .toggle-btn:hover {
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+
+  .catalog-sec.collapsed .toggle-btn {
+    transform: rotate(-90deg);
+  }
+
+  .sec-desc {
+    margin: 8px 0 16px;
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ---------- CARRUSEL TRACK (HORIZONTAL SCROLL) ---------- */
+  .sec-body {
+    transition: max-height 0.35s ease, opacity 0.25s ease, margin 0.25s ease;
+    overflow: hidden;
+  }
+
+  .catalog-sec.collapsed .sec-body {
+    max-height: 0 !important;
+    opacity: 0;
+    margin: 0;
+    pointer-events: none;
+  }
+
+  .carousel-wrapper {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    mask-image: linear-gradient(to right, black calc(100% - 56px), transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, black calc(100% - 56px), transparent 100%);
+  }
+
+  .carousel-track {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 10px 48px 14px 4px;
+    cursor: grab;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overscroll-behavior-x: contain;
+  }
+
+  .carousel-track:active {
+    cursor: grabbing;
+  }
+
+  .carousel-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* ---------- TARJETA DE SIMULADOR ---------- */
+  .card-sim {
+    flex: 0 0 292px;
+    scroll-snap-align: start;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 18px 18px 16px;
+    min-height: 168px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
+                border-color 0.2s ease, 
+                background 0.2s ease, 
+                box-shadow 0.2s ease;
+    overflow: hidden;
+  }
+
+  .card-sim::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 100% 0%, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .card-sim:hover, .card-sim:focus-visible {
+    transform: translateY(-4px) scale(1.015);
+    border-color: var(--c, var(--c-dron));
+    background: var(--bg-card-hover);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4), 0 0 18px rgba(56, 189, 248, 0.12);
+  }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+
+  .card-ico {
+    font-size: 28px;
+    line-height: 1;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+  }
+
+  .card-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    font-size: 13px;
+    font-weight: 800;
+    background: rgba(0, 0, 0, 0.45);
+    color: var(--c, var(--c-dron));
+    border: 1px solid var(--c, var(--c-dron));
+  }
+
+  .card-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+
+  .card-desc {
+    font-size: 12.8px;
+    color: var(--muted);
+    line-height: 1.48;
+    margin-bottom: 14px;
+    flex-grow: 1;
+  }
+
+  .card-desc b {
+    color: var(--ink);
+  }
+
+  .card-foot {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .card-tag {
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--dim);
+  }
+
+  .card-go {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--c, var(--ink));
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: transform 0.15s ease;
+  }
+
+  .card-sim:hover .card-go {
+    transform: translateX(4px);
+  }
+
+  /* ---------- CLASES TEMÁTICAS ---------- */
+  .sec-dron { --c: var(--c-dron); }
+  .sec-robo { --c: var(--c-robo); }
+  .sec-iot { --c: var(--c-iot); }
+  .sec-meteo { --c: var(--c-meteo); }
+  .sec-ofi { --c: var(--c-ofi); }
+  .sec-ref { --c: var(--c-ref); }
+  .sec-lab { --c: var(--c-lab); }
+  .sec-bi { --c: var(--c-bi); }
+  .sec-segu { --c: var(--c-segu); }
+  .sec-bd { --c: var(--c-bd); }
+  .sec-ia { --c: var(--c-ia); }
+  .sec-moodle { --c: var(--c-moodle); }
+  .sec-eje { --c: var(--c-eje); }
+  .sec-alt { --c: var(--c-alt); }
+
+  /* Pie de página */
+  footer {
+    scroll-snap-align: end;
+    scroll-snap-stop: normal;
+    margin-top: 48px;
+    padding: 28px 20px;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--muted);
+    text-align: center;
+    line-height: 1.7;
+    background: rgba(6, 11, 16, 0.6);
+  }
+
+  footer b { color: var(--ink); }
+
+  .catalog-sec.in-view {
+    border-color: rgba(66, 213, 255, 0.4);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(56, 189, 248, 0.12);
+  }
+
+  @media (max-width: 680px) {
+    .nav-bar { flex-wrap: wrap; }
+    .search-box { min-width: 100%; order: 3; }
+    .card-sim { flex: 0 0 85vw; }
+    .catalog-sec { padding: 16px 14px 14px; }
+    .sec-controls .arrow-btn { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP NAVBAR MINIMALISTA -->
+<header class="app-header">
+  <div class="nav-bar">
+    <div class="brand">
+      <span class="brand-ico">🛰️</span>
+      <h1 class="brand-title">Simuladores TIC <span class="brand-pill">CURZA · UNCo</span></h1>
+    </div>
+
+    <div class="search-box">
+      <span class="search-ico">🔍</span>
+      <input type="text" id="sim-search" placeholder="Buscar simulador (dron, sql, arduino, satélite...)" autocomplete="off">
+    </div>
+
+    <div class="nav-actions">
+      <button class="btn-dock" id="btn-toggle-all">📁 Contraer</button>
+      <a class="btn-dock" href="index-codex.html" title="Índice alternativo Codex">📖 Codex</a>
+    </div>
+  </div>
+
+  <div class="pills-bar" id="pills-bar">
+    <div class="pill active" data-target="all">🌟 Todos</div>
+    <div class="pill" data-target="sec-dron" style="--accent-color: var(--c-dron)">🚁 Drones</div>
+    <div class="pill" data-target="sec-robo" style="--accent-color: var(--c-robo)">🦾 Robótica</div>
+    <div class="pill" data-target="sec-iot" style="--accent-color: var(--c-iot)">🔌 IoT</div>
+    <div class="pill" data-target="sec-meteo" style="--accent-color: var(--c-meteo)">🌦️ Meteo</div>
+    <div class="pill" data-target="sec-ofi" style="--accent-color: var(--c-ofi)">🖥️ Ofimática</div>
+    <div class="pill" data-target="sec-ref" style="--accent-color: var(--c-ref)">📐 Despieces</div>
+    <div class="pill" data-target="sec-lab" style="--accent-color: var(--c-lab)">🔬 SIG / CAD</div>
+    <div class="pill" data-target="sec-bi" style="--accent-color: var(--c-bi)">📊 BI</div>
+    <div class="pill" data-target="sec-segu" style="--accent-color: var(--c-segu)">🔐 Seguridad</div>
+    <div class="pill" data-target="sec-bd" style="--accent-color: var(--c-bd)">🗄️ SQL</div>
+    <div class="pill" data-target="sec-ia" style="--accent-color: var(--c-ia)">🤖 IA</div>
+    <div class="pill" data-target="sec-moodle" style="--accent-color: var(--c-moodle)">🎓 Moodle</div>
+    <div class="pill" data-target="sec-eje" style="--accent-color: var(--c-eje)">📚 Guías</div>
+    <div class="pill" data-target="sec-alt" style="--accent-color: var(--c-alt)">🧪 Prototipos</div>
+  </div>
+</header>
+
+<!-- CONTENEDOR PRINCIPAL -->
+<div class="main-wrap">
+
+  <!-- 1. DRON -->
+  <section class="catalog-sec sec-dron" id="sec-dron">
+    <div class="sec-header">
+      <div class="sec-title-group">
+        <h2>🚁 Simulador de Dron</h2>
+        <span class="tag-cat">Ruta progresiva</span>
+        <span class="tag-count">7 simuladores</span>
+      </div>
+      <div class="sec-controls">
+        <button class="arrow-btn btn-prev" aria-label="Anterior">‹</button>
+        <button class="arrow-btn btn-next" aria-label="Siguiente">›</button>
+        <button class="toggle-btn" aria-label="Alternar sección">▼</button>
+      </div>
+    </div>
+    <p class="sec-desc">Siete etapas formativas: desde el pilotaje en primera persona hasta la planificación, gestión de batería, vuelo en condiciones climáticas adversas y programación textual.</p>
+    
+    <div class="sec-body">
+      <div class="carousel-wrapper">
+        <div class="carousel-track">
+          <a class="card-sim" href="simuladores/dron/modo-libre.html">
+            <div class="card-top"><span class="card-ico">🕹️</span><span class="card-num">0</span></div>
+            <div class="card-title">Modo libre · Cabina FPV</div>
+            <div class="card-desc">Pilotá en primera persona con palancas virtuales o teclado. <b>4 circuitos de aros</b>, desde práctica libre hasta slalom vertical con récord propio.</div>
+            <div class="card-foot"><span class="card-tag">FPV 3D Puro</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="simuladores/dron/etapa-1.html">
+            <div class="card-top"><span class="card-ico">🗺️</span><span class="card-num">1</span></div>
+            <div class="card-title">Planificación de ruta</div>
+            <div class="card-desc">Marcá puntos clave en el mapa y optimizá la trayectoria. <b>3 niveles</b> con alcance limitado de batería y regreso al punto de origen.</div>
+            <div class="card-foot"><span class="card-tag">Rutas GPS</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="simuladores/dron/etapa-2.html">
+            <div class="card-top"><span class="card-ico">🧩</span><span class="card-num">2</span></div>
+            <div class="card-title">Misiones con acciones</div>
+            <div class="card-desc">Programá mediante bloques lógicos: despegue, toma de muestras fotográficas, recogida y liberación de paquetes en orden estricto.</div>
+            <div class="card-foot"><span class="card-tag">Bloques</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="simuladores/dron/etapa-3.html">
+            <div class="card-top"><span class="card-ico">🔋</span><span class="card-num">3</span></div>
+            <div class="card-title">Gestión de recursos</div>
+            <div class="card-desc">Cálculo dinámico de descarga según distancia, velocidad del viento y peso de la carga. <b>3 misiones</b> con telemetría en tiempo real.</div>
+            <div class="card-foot"><span class="card-tag">Telemetría</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="simuladores/dron/etapa-4.html">
+            <div class="card-top"><span class="card-ico">🌩️</span><span class="card-num">4</span></div>
+            <div class="card-title">Condiciones meteorológicas</div>
+            <div class="card-desc">Ventana operativa según ráfagas de viento y frentes de tormenta. Tomá decisiones críticas de abortar o completar la misión a tiempo.</div>
+            <div class="card-foot"><span class="card-tag">Seguridad</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="simuladores/dron/etapa-5.html">
+            <div class="card-top"><span class="card-ico">🧠</span><span class="card-num">5</span></div>
+            <div class="card-title">Optimización matemática</div>
+            <div class="card-desc">Resolución del problema del viajante en parcelas agrícolas: descubrí la ruta de menor gasto energético y ganá estrellas de eficiencia.</div>
+            <div class="card-foot"><span class="card-tag">Algoritmos</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="simuladores/dron/etapa-6.html">
+            <div class="card-top"><span class="card-ico">⌨️</span><span class="card-num">6</span></div>
+            <div class="card-title">Del bloque al código</div>
+            <div class="card-desc">Escribí scripts textuales de vuelo con parámetros numéricos, bucles <code>repetir { }</code> y desniveles de cota altimétrica en 3 dimensiones.</div>
+            <div class="card-foot"><span class="card-tag">Scripting</span><span class="card-go">Abrir →</span></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. ROBOTICA -->
+  <section class="catalog-sec sec-robo" id="sec-robo">
+    <div class="sec-header">
+      <div class="sec-title-group">
+        <h2>🦾 Robótica</h2>
+        <span class="tag-cat">Cinemática y Automatización</span>
+        <span class="tag-count">1 simulador</span>
+      </div>
+      <div class="sec-controls">
+        <button class="arrow-btn btn-prev" aria-label="Anterior">‹</button>
+        <button class="arrow-btn btn-next" aria-label="Siguiente">›</button>
+        <button class="toggle-btn" aria-label="Alternar sección">▼</button>
+      </div>
+    </div>
+    <p class="sec-desc">Control cinemático y robótica industrial aplicada al agro y la clasificación automática.</p>
+    <div class="sec-body">
+      <div class="carousel-wrapper">
+        <div class="carousel-track">
+          <a class="card-sim" href="simuladores/robotica/brazo-bloques.html">
+            <div class="card-top"><span class="card-ico">🦾</span><span class="card-num">3D</span></div>
+            <div class="card-title">Brazo robótico articulado</div>
+            <div class="card-desc">Programá un brazo robótico articulado en 3D con bloques visuales: trasplante de plantines y clasificación automática de frutos por colorimetría.</div>
+            <div class="card-foot"><span class="card-tag">Cinemática 3D</span><span class="card-go">Abrir →</span></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. IOT & ARDUINO -->
+  <section class="catalog-sec sec-iot" id="sec-iot">
+    <div class="sec-header">
+      <div class="sec-title-group">
+        <h2>🔌 Arduino / IoT</h2>
+        <span class="tag-cat">Sistemas Embebidos</span>
+        <span class="tag-count">4 simuladores</span>
+      </div>
+      <div class="sec-controls">
+        <button class="arrow-btn btn-prev" aria-label="Anterior">‹</button>
+        <button class="arrow-btn btn-next" aria-label="Siguiente">›</button>
+        <button class="toggle-btn" aria-label="Alternar sección">▼</button>
+      </div>
+    </div>
+    <p class="sec-desc">Entornos para interactuar con sensores, actuadores y automatización de cultivos, con generación de código C++ para placas físicas.</p>
+    <div class="sec-body">
+      <div class="carousel-wrapper">
+        <div class="carousel-track">
+          <a class="card-sim" href="simuladores/iot/arduino-banco.html">
+            <div class="card-top"><span class="card-ico">🔌</span><span class="card-num">1</span></div>
+            <div class="card-title">Banco Arduino / IoT</div>
+            <div class="card-desc">Simulador interactivo con pulsadores, potenciómetros, LDR, LEDs y servos. Genera en vivo el sketch C++ real para compilar en Arduino IDE.</div>
+            <div class="card-foot"><span class="card-tag">Hardware C++</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="simuladores/iot/vivero.html">
+            <div class="card-top"><span class="card-ico">🌱</span><span class="card-num">2</span></div>
+            <div class="card-title">Vivero inteligente</div>
+            <div class="card-desc">Sistema de control de riego para 3 zonas independientes en base a sensores higrométricos de suelo, nivel de reserva y reloj horario.</div>
+            <div class="card-foot"><span class="card-tag">Cultivo IoT</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="simuladores/iot/vivero-automatizado.html">
+            <div class="card-top"><span class="card-ico">💧</span><span class="card-num">3</span></div>
+            <div class="card-title">Vivero automatizado integral</div>
+            <div class="card-desc">Automatización avanzada de microclima: control de electroválvulas, dosificación de nutrientes, nebulizadores y ventilación forzada.</div>
+            <div class="card-foot"><span class="card-tag">Invernadero</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="simuladores/iot/arduino-despiece.html">
+            <div class="card-top"><span class="card-ico">🔧</span><span class="card-num">4</span></div>
+            <div class="card-title">Despiece del sistema Arduino</div>
+            <div class="card-desc">Exploración anatómica en capas: microcontrolador ATmega, reguladores de tensión, buses de comunicación I2C/SPI y pines GPIO.</div>
+            <div class="card-foot"><span class="card-tag">Anatomía HW</span><span class="card-go">Abrir →</span></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. METEOROLOGIA -->
+  <section class="catalog-sec sec-meteo" id="sec-meteo">
+    <div class="sec-header">
+      <div class="sec-title-group">
+        <h2>🌦️ Meteorología</h2>
+        <span class="tag-cat">Monitoreo Ambiental</span>
+        <span class="tag-count">3 simuladores</span>
+      </div>
+      <div class="sec-controls">
+        <button class="arrow-btn btn-prev" aria-label="Anterior">‹</button>
+        <button class="arrow-btn btn-next" aria-label="Siguiente">›</button>
+        <button class="toggle-btn" aria-label="Alternar sección">▼</button>
+      </div>
+    </div>
+    <p class="sec-desc">Adquisición y procesamiento de variables agrometeorológicas con exportación de registros tabulares.</p>
+    <div class="sec-body">
+      <div class="carousel-wrapper">
+        <div class="carousel-track">
+          <a class="card-sim" href="simuladores/meteo/central-meteo.html">
+            <div class="card-top"><span class="card-ico">🌦️</span><span class="card-num">1</span></div>
+            <div class="card-title">Central meteorológica</div>
+            <div class="card-desc">Registro en vivo de temperatura, humedad relativa, viento, pluviometría y presión barométrica con curvas temporales y exportación a CSV.</div>
+            <div class="card-foot"><span class="card-tag">Estación Activa</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="simuladores/meteo/estacion-meteorologica.html">
+            <div class="card-top"><span class="card-ico">🌡️</span><span class="card-num">2</span></div>
+            <div class="card-title">Despiece estación meteorológica</div>
+            <div class="card-desc">Análisis de instrumentos de precisión: abrigo meteorológico, termohigrómetro digital, anemómetro de cazoletas y barómetro piezoeléctrico.</div>
+            <div class="card-foot"><span class="card-tag">Instrumentación</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="simuladores/meteo/estacion-meteorologica-gemini.html">
+            <div class="card-top"><span class="card-ico">🌐</span><span class="card-num">3</span></div>
+            <div class="card-title">Estación inmersiva 3D</div>
+            <div class="card-desc">Prototipo volumétrico con radar animado, vientos cruzados y visualización de frentes térmicos en un entorno 3D navegable.</div>
+            <div class="card-foot"><span class="card-tag">Visualización 3D</span><span class="card-go">Abrir →</span></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. OFIMATICA -->
+  <section class="catalog-sec sec-ofi" id="sec-ofi">
+    <div class="sec-header">
+      <div class="sec-title-group">
+        <h2>🖥️ Suite Ofimática</h2>
+        <span class="tag-cat">Productividad Técnica</span>
+        <span class="tag-count">3 simuladores</span>
+      </div>
+      <div class="sec-controls">
+        <button class="arrow-btn btn-prev" aria-label="Anterior">‹</button>
+        <button class="arrow-btn btn-next" aria-label="Siguiente">›</button>
+        <button class="toggle-btn" aria-label="Alternar sección">▼</button>
+      </div>
+    </div>
+    <p class="sec-desc">Dominio riguroso de documentos técnicos: redacción estructurada con estilos y modelado matemático en hojas de cálculo.</p>
+    <div class="sec-body">
+      <div class="carousel-wrapper">
+        <div class="carousel-track">
+          <a class="card-sim" href="simuladores/ofimatica/writer-maqueta.html">
+            <div class="card-top"><span class="card-ico">📝</span><span class="card-num">1</span></div>
+            <div class="card-title">Procesador de textos técnico</div>
+            <div class="card-desc">Maquetación formal de informes periciales y tesis: aplicación de jerarquía de títulos, sumarios automáticos y numeración por secciones.</div>
+            <div class="card-foot"><span class="card-tag">Tipografía</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="simuladores/ofimatica/calc-1-formulas.html">
+            <div class="card-top"><span class="card-ico">📊</span><span class="card-num">2</span></div>
+            <div class="card-title">Planilla · Fundamentos y fórmulas</div>
+            <div class="card-desc">13 misiones evolutivas: referencias relativas y absolutas ($), funciones lógicas SI/Y/O, operadores de fecha y búsquedas complejas con BUSCARV.</div>
+            <div class="card-foot"><span class="card-tag">13 Misiones</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="simuladores/ofimatica/calc-2-datos.html">
+            <div class="card-top"><span class="card-ico">📈</span><span class="card-num">3</span></div>
+            <div class="card-title">Planilla · Análisis de datos</div>
+            <div class="card-desc">Filtrado masivo, ordenamiento multicriterio, construcción de tablas dinámicas y gráficos vinculados sobre series de ventas agropecuarias.</div>
+            <div class="card-foot"><span class="card-tag">Tablas Dinámicas</span><span class="card-go">Abrir →</span></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. DESPIECES TECNICOS -->
+  <section class="catalog-sec sec-ref" id="sec-ref">
+    <div class="sec-header">
+      <div class="sec-title-group">
+        <h2>📐 Despieces Técnicos</h2>
+        <span class="tag-cat">Anatomía de Hardware</span>
+        <span class="tag-count">4 despieces</span>
+      </div>
+      <div class="sec-controls">
+        <button class="arrow-btn btn-prev" aria-label="Anterior">‹</button>
+        <button class="arrow-btn btn-next" aria-label="Siguiente">›</button>
+        <button class="toggle-btn" aria-label="Alternar sección">▼</button>
+      </div>
+    </div>
+    <p class="sec-desc">Modelos de ingeniería desglosados componente por componente para comprender la arquitectura interna de los equipos reales.</p>
+    <div class="sec-body">
+      <div class="carousel-wrapper">
+        <div class="carousel-track">
+          <a class="card-sim" href="simuladores/dron/dron-despiece.html">
+            <div class="card-top"><span class="card-ico">🚁</span><span class="card-num">1</span></div>
+            <div class="card-title">Dron multirrotor</div>
+            <div class="card-desc">Controladora de vuelo, variadores ESC, motores brushless, hélices de paso inverso, receptor telemetría y módulo GPS/brújula.</div>
+            <div class="card-foot"><span class="card-tag">Aviónica</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="simuladores/iot/arduino-despiece.html">
+            <div class="card-top"><span class="card-ico">🔧</span><span class="card-num">2</span></div>
+            <div class="card-title">Sistema Arduino</div>
+            <div class="card-desc">Despiece del encapsulado, oscilador de cristal de cuarzo, conversor USB-Serial, reguladores LDO y mapa de registros del chip.</div>
+            <div class="card-foot"><span class="card-tag">Microelectrónica</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="simuladores/meteo/estacion-meteorologica.html">
+            <div class="card-top"><span class="card-ico">🌡️</span><span class="card-num">3</span></div>
+            <div class="card-title">Estación meteorológica</div>
+            <div class="card-desc">Pluviómetro de balancín basculante, sensor termo-higrométrico protegido de radiación solar y transductor de velocidad de viento.</div>
+            <div class="card-foot"><span class="card-tag">Metrología</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="simuladores/iot/vivero-automatizado.html">
+            <div class="card-top"><span class="card-ico">💧</span><span class="card-num">4</span></div>
+            <div class="card-title">Vivero automatizado</div>
+            <div class="card-desc">Bombas peristálticas dosificadoras de fertilizante, electroválvulas solenoides de diafragma y colectores de distribución presurizados.</div>
+            <div class="card-foot"><span class="card-tag">Agrotecnología</span><span class="card-go">Abrir →</span></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. LABORATORIOS SIG & CAD -->
+  <section class="catalog-sec sec-lab" id="sec-lab">
+    <div class="sec-header">
+      <div class="sec-title-group">
+        <h2>🔬 Laboratorios Autónomos (SIG, CAD & Gestión)</h2>
+        <span class="tag-cat">Prácticas Territoriales</span>
+        <span class="tag-count">5 módulos</span>
+      </div>
+      <div class="sec-controls">
+        <button class="arrow-btn btn-prev" aria-label="Anterior">‹</button>
+        <button class="arrow-btn btn-next" aria-label="Siguiente">›</button>
+        <button class="toggle-btn" aria-label="Alternar sección">▼</button>
+      </div>
+    </div>
+    <p class="sec-desc">Sistemas de Información Geográfica, procesamiento de imágenes satelitales, dibujo técnico para paisajismo y gestión pública.</p>
+    <div class="sec-body">
+      <div class="carousel-wrapper">
+        <div class="carousel-track">
+          <a class="card-sim" href="simuladores/sig-cad/sig-teledeteccion-autonomo.html">
+            <div class="card-top"><span class="card-ico">🛰️</span><span class="card-num">I</span></div>
+            <div class="card-title">Laboratorio SIG y teledetección I</div>
+            <div class="card-desc">Capas vectoriales, tablas de atributos, consultas espaciales, índices espectrales NDVI y zonificación agronómica con misión de incendios.</div>
+            <div class="card-foot"><span class="card-tag">Escena Sintética</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="sig-teledeteccion-ii/index.html">
+            <div class="card-top"><span class="card-ico">🛰️</span><span class="card-num">II</span></div>
+            <div class="card-title">Laboratorio SIG y teledetección II</div>
+            <div class="card-desc"><b>Escenas reales destiladas:</b> Sentinel-2 y Landsat del valle de Viedma e incendios de Los Alerces. Buffers, aptitud edáfica, bandas y dNBR.</div>
+            <div class="card-foot"><span class="card-tag">Datos Sentinel / USGS</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="simuladores/sig-cad/cad-espacios-verdes-autonomo.html">
+            <div class="card-top"><span class="card-ico">📏</span><span class="card-num">CAD</span></div>
+            <div class="card-title">Laboratorio CAD para espacios verdes</div>
+            <div class="card-desc">Dibujo técnico asistido por computadora: precisión milimétrica, acotado, gestión de capas temáticas y planos paisajísticos para diseño urbano.</div>
+            <div class="card-foot"><span class="card-tag">Diseño Urbano</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="simuladores/sig-cad/simulador-opencad-espacios-verdes.html">
+            <div class="card-top"><span class="card-ico">📐</span><span class="card-num">App</span></div>
+            <div class="card-title">Simulador OpenCAD interactivo</div>
+            <div class="card-desc">Mesa de dibujo interactiva basada en vectores para diseñar parquizaciones, senderos, canteros y distribución de especies arbóreas.</div>
+            <div class="card-foot"><span class="card-tag">OpenCAD Web</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="simuladores/sig-cad/gde-circuito-organizacional-autonomo.html">
+            <div class="card-top"><span class="card-ico">🏛️</span><span class="card-num">GDE</span></div>
+            <div class="card-title">Circuito Organizacional GDE</div>
+            <div class="card-desc">Simulación completa de administración pública: expediente electrónico (EE), documentos oficiales (GEDO), pases de sector y acceso a la información.</div>
+            <div class="card-foot"><span class="card-tag">Gestión Pública</span><span class="card-go">Abrir →</span></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. BUSINESS INTELLIGENCE (BI) -->
+  <section class="catalog-sec sec-bi" id="sec-bi">
+    <div class="sec-header">
+      <div class="sec-title-group">
+        <h2>📊 Estudio de Business Intelligence (BI)</h2>
+        <span class="tag-cat">Looker Studio / Dashboards</span>
+        <span class="tag-count">3 etapas</span>
+      </div>
+      <div class="sec-controls">
+        <button class="arrow-btn btn-prev" aria-label="Anterior">‹</button>
+        <button class="arrow-btn btn-next" aria-label="Siguiente">›</button>
+        <button class="toggle-btn" aria-label="Alternar sección">▼</button>
+      </div>
+    </div>
+    <p class="sec-desc">Ciclo de vida de la analítica de negocio: desde la conexión y saneamiento de fuentes hasta la publicación de paneles interactivos.</p>
+    <div class="sec-body">
+      <div class="carousel-wrapper">
+        <div class="carousel-track">
+          <a class="card-sim" href="simuladores/bi/bi-1-fuentes.html">
+            <div class="card-top"><span class="card-ico">🗂️</span><span class="card-num">1</span></div>
+            <div class="card-title">Fuentes de datos y campos</div>
+            <div class="card-desc">Conexión de repositorios tabulares, tipado de columnas, discriminación rigurosa entre dimensiones y métricas, y saneamiento de valores nulos.</div>
+            <div class="card-foot"><span class="card-tag">Data Cleaning</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="simuladores/bi/bi-2-informes.html">
+            <div class="card-top"><span class="card-ico">📊</span><span class="card-num">2</span></div>
+            <div class="card-title">Diseño de tableros y visualización</div>
+            <div class="card-desc">Selección efectiva del gráfico adecuado para cada interrogante: tarjetas de valor único, barras comparativas, dispersión y series cronológicas.</div>
+            <div class="card-foot"><span class="card-tag">Data Viz</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="simuladores/bi/bi-3-interactivo.html">
+            <div class="card-top"><span class="card-ico">🎛️</span><span class="card-num">3</span></div>
+            <div class="card-title">Paneles interactivos y filtros</div>
+            <div class="card-desc">Controles de filtrado cruzado dinámico, selectores de ventana temporal, campos calculados con agregaciones y permisos de auditoría.</div>
+            <div class="card-foot"><span class="card-tag">Dashboards</span><span class="card-go">Abrir →</span></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. SEGURIDAD -->
+  <section class="catalog-sec sec-segu" id="sec-segu">
+    <div class="sec-header">
+      <div class="sec-title-group">
+        <h2>🔐 Laboratorio de Ciberseguridad</h2>
+        <span class="tag-cat">Protección de Datos</span>
+        <span class="tag-count">4 etapas</span>
+      </div>
+      <div class="sec-controls">
+        <button class="arrow-btn btn-prev" aria-label="Anterior">‹</button>
+        <button class="arrow-btn btn-next" aria-label="Siguiente">›</button>
+        <button class="toggle-btn" aria-label="Alternar sección">▼</button>
+      </div>
+    </div>
+    <p class="sec-desc">Seguridad informática aplicada: criptografía clásica y moderna, resistencia de contraseñas, defensa contra ingeniería social y firma digital legal.</p>
+    <div class="sec-body">
+      <div class="carousel-wrapper">
+        <div class="carousel-track">
+          <a class="card-sim" href="simuladores/seguridad/segu-1-claves.html">
+            <div class="card-top"><span class="card-ico">🔑</span><span class="card-num">1</span></div>
+            <div class="card-title">Autenticación, claves y 2FA</div>
+            <div class="card-desc">Probador de entropía, simulación de ataques por diccionario y fuerza bruta, y eficacia del segundo factor (2FA/TOTP) ante filtraciones.</div>
+            <div class="card-foot"><span class="card-tag">Entropía & 2FA</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="simuladores/seguridad/segu-2-cifrado.html">
+            <div class="card-top"><span class="card-ico">🏛️</span><span class="card-num">2</span></div>
+            <div class="card-title">Taller práctico de cifrado</div>
+            <div class="card-desc">De la sustitución de César al cifrado asimétrico RSA: criptoanálisis por frecuencias y mecánica de clave pública y privada.</div>
+            <div class="card-foot"><span class="card-tag">Criptografía</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="simuladores/seguridad/segu-3-phishing.html">
+            <div class="card-top"><span class="card-ico">🎣</span><span class="card-num">3</span></div>
+            <div class="card-title">Caza-phishing e ingeniería social</div>
+            <div class="card-desc">Bandeja de entrada interactiva con 8 casos simulados: inspección de cabeceras, detección de URLs engañosas y respuesta ante incidentes.</div>
+            <div class="card-foot"><span class="card-tag">Defensa Activa</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="simuladores/seguridad/segu-4-firma-certificados.html">
+            <div class="card-top"><span class="card-ico">✍️</span><span class="card-num">4</span></div>
+            <div class="card-title">Firma digital y certificados SSL</div>
+            <div class="card-desc">Firmado criptográfico de documentos y correos con principio de no repudio (Ley 25.506) e inspección de certificados SSL del navegador.</div>
+            <div class="card-foot"><span class="card-tag">Firma Ley 25.506</span><span class="card-go">Abrir →</span></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. BASES DE DATOS -->
+  <section class="catalog-sec sec-bd" id="sec-bd">
+    <div class="sec-header">
+      <div class="sec-title-group">
+        <h2>🗄️ Taller de Bases de Datos</h2>
+        <span class="tag-cat">Modelo Relacional & SQL</span>
+        <span class="tag-count">3 etapas</span>
+      </div>
+      <div class="sec-controls">
+        <button class="arrow-btn btn-prev" aria-label="Anterior">‹</button>
+        <button class="arrow-btn btn-next" aria-label="Siguiente">›</button>
+        <button class="toggle-btn" aria-label="Alternar sección">▼</button>
+      </div>
+    </div>
+    <p class="sec-desc">Caso práctico de modelado institucional: normalización de planillas planas, consultas con SQL estándar e integridad referencial.</p>
+    <div class="sec-body">
+      <div class="carousel-wrapper">
+        <div class="carousel-track">
+          <a class="card-sim" href="simuladores/bd/bd-1-tablas.html">
+            <div class="card-top"><span class="card-ico">🧱</span><span class="card-num">1</span></div>
+            <div class="card-title">Diseño de tablas y normalización</div>
+            <div class="card-desc">Detección de anomalías de redundancia y actualización en planillas únicas: creación de tablas normalizadas, claves primarias (PK) y foráneas (FK).</div>
+            <div class="card-foot"><span class="card-tag">Normalización</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="simuladores/bd/bd-2-consultas.html">
+            <div class="card-top"><span class="card-ico">💬</span><span class="card-num">2</span></div>
+            <div class="card-title">Consultas con SQL real</div>
+            <div class="card-desc">Interrogación directa al motor SQL del navegador: cláusulas SELECT, WHERE, filtros booleanos AND/OR, ordenamiento ORDER BY y límites.</div>
+            <div class="card-foot"><span class="card-tag">Motor SQL</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="simuladores/bd/bd-3-relaciones.html">
+            <div class="card-top"><span class="card-ico">🧩</span><span class="card-num">3</span></div>
+            <div class="card-title">JOINs e integridad referencial</div>
+            <div class="card-desc">Cruce relacional de entidades mediante INNER JOIN, visualización gráfica de vínculos de claves y verificación de restricciones de eliminación en cascada.</div>
+            <div class="card-foot"><span class="card-tag">Relaciones JOIN</span><span class="card-go">Abrir →</span></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. INTELIGENCIA ARTIFICIAL -->
+  <section class="catalog-sec sec-ia" id="sec-ia">
+    <div class="sec-header">
+      <div class="sec-title-group">
+        <h2>🤖 Laboratorio de Inteligencia Artificial</h2>
+        <span class="tag-cat">Machine Learning Transparente</span>
+        <span class="tag-count">3 etapas</span>
+      </div>
+      <div class="sec-controls">
+        <button class="arrow-btn btn-prev" aria-label="Anterior">‹</button>
+        <button class="arrow-btn btn-next" aria-label="Siguiente">›</button>
+        <button class="toggle-btn" aria-label="Alternar sección">▼</button>
+      </div>
+    </div>
+    <p class="sec-desc">La IA desmitificada por dentro: entrenamiento supervisado, detección de sesgos éticos y modelos generativos probabilísticos.</p>
+    <div class="sec-body">
+      <div class="carousel-wrapper">
+        <div class="carousel-track">
+          <a class="card-sim" href="simuladores/ia/ia-1-clasificador.html">
+            <div class="card-top"><span class="card-ico">🍎</span><span class="card-num">1</span></div>
+            <div class="card-title">Entrená un clasificador</div>
+            <div class="card-desc">Etiquetado manual de muestras, entrenamiento de fronteras de decisión y análisis de errores producidos por datos envenenados o sesgados.</div>
+            <div class="card-foot"><span class="card-tag">Supervisado</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="simuladores/ia/ia-2-sesgo.html">
+            <div class="card-top"><span class="card-ico">⚖️</span><span class="card-num">2</span></div>
+            <div class="card-title">Auditoría ética del sesgo</div>
+            <div class="card-desc">Auditoría forense sobre un algoritmo de adjudicación de becas: variables proxy, discriminación estadística indirecta y la necesidad de supervisión humana.</div>
+            <div class="card-foot"><span class="card-tag">Ética Algorítmica</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="simuladores/ia/ia-3-generador.html">
+            <div class="card-top"><span class="card-ico">✍️</span><span class="card-num">3</span></div>
+            <div class="card-title">Modelos generativos de texto</div>
+            <div class="card-desc">«Predice, no sabe»: funcionamiento interno de los LLMs con distribución de probabilidades de tokens, muestreo de temperatura y alucinaciones.</div>
+            <div class="card-foot"><span class="card-tag">LLM Predictivo</span><span class="card-go">Abrir →</span></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. MOODLE / CAMPUS -->
+  <section class="catalog-sec sec-moodle" id="sec-moodle">
+    <div class="sec-header">
+      <div class="sec-title-group">
+        <h2>🎓 Campus Virtual Simulado</h2>
+        <span class="tag-cat">Entornos Moodle</span>
+        <span class="tag-count">3 perfiles</span>
+      </div>
+      <div class="sec-controls">
+        <button class="arrow-btn btn-prev" aria-label="Anterior">‹</button>
+        <button class="arrow-btn btn-next" aria-label="Siguiente">›</button>
+        <button class="toggle-btn" aria-label="Alternar sección">▼</button>
+      </div>
+    </div>
+    <p class="sec-desc">Recorrido por las tres perspectivas fundamentales de un sistema de gestión del aprendizaje institucional.</p>
+    <div class="sec-body">
+      <div class="carousel-wrapper">
+        <div class="carousel-track">
+          <a class="card-sim" href="simuladores/moodle/moodle-1-estudiante.html">
+            <div class="card-top"><span class="card-ico">🎒</span><span class="card-num">1</span></div>
+            <div class="card-title">Perfil Estudiante</div>
+            <div class="card-desc">Descarga de recursos bibliográficos, entrega de actividades con límite de fecha, participación en foros y cuestionarios con calificación automática.</div>
+            <div class="card-foot"><span class="card-tag">Rol Estudiante</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="simuladores/moodle/moodle-2-docente.html">
+            <div class="card-top"><span class="card-ico">🍎</span><span class="card-num">2</span></div>
+            <div class="card-title">Perfil Docente</div>
+            <div class="card-desc">Modo edición del aula, alta de tareas, configuración de ponderaciones en el libro de calificaciones y corrección mediante rúbricas analíticas.</div>
+            <div class="card-foot"><span class="card-tag">Rol Docente</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="simuladores/moodle/moodle-3-admin.html">
+            <div class="card-top"><span class="card-ico">🔧</span><span class="card-num">3</span></div>
+            <div class="card-title">Perfil Administrador</div>
+            <div class="card-desc">Matriculación masiva de cohortes, asignación de permisos y roles granulares, políticas de seguridad de claves y backups del servidor.</div>
+            <div class="card-foot"><span class="card-tag">Rol Sysadmin</span><span class="card-go">Abrir →</span></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13. RESOLUCIONES Y GUIAS -->
+  <section class="catalog-sec sec-eje" id="sec-eje">
+    <div class="sec-header">
+      <div class="sec-title-group">
+        <h2>📚 Resoluciones de Ejercicios y Guías</h2>
+        <span class="tag-cat">Material Académico</span>
+        <span class="tag-count">3 suites</span>
+      </div>
+      <div class="sec-controls">
+        <button class="arrow-btn btn-prev" aria-label="Anterior">‹</button>
+        <button class="arrow-btn btn-next" aria-label="Siguiente">›</button>
+        <button class="toggle-btn" aria-label="Alternar sección">▼</button>
+      </div>
+    </div>
+    <p class="sec-desc">Guías paso a paso, ejercicios resueltos y videos explicativos con subtítulos accesibles.</p>
+    <div class="sec-body">
+      <div class="carousel-wrapper">
+        <div class="carousel-track">
+          <a class="card-sim" href="resoluciones-ejercicios/index.html">
+            <div class="card-top"><span class="card-ico">📖</span><span class="card-num">GEN</span></div>
+            <div class="card-title">Resoluciones de Ejercicios Generales</div>
+            <div class="card-desc">Repositorio exhaustivo de actividades prácticas resueltas para las distintas materias del seminario tecnológico.</div>
+            <div class="card-foot"><span class="card-tag">Casos de Estudio</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="resoluciones-ejercicios-cad/index.html">
+            <div class="card-top"><span class="card-ico">📐</span><span class="card-num">CAD</span></div>
+            <div class="card-title">Resoluciones y Guías de CAD</div>
+            <div class="card-desc">Secuencias guiadas para dibujo asistido: trazado de poligonales, cotas, bloques paramétricos e implantaciones paisajísticas.</div>
+            <div class="card-foot"><span class="card-tag">Planos Guiados</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="resoluciones-ejercicios-qgis/index.html">
+            <div class="card-top"><span class="card-ico">🛰️</span><span class="card-num">QGIS</span></div>
+            <div class="card-title">Resoluciones y Videotutoriales QGIS</div>
+            <div class="card-desc">Colección multimedia completa: videos en alta resolución con pistas de subtítulos (VTT/SRT) y guías en formato PDF.</div>
+            <div class="card-foot"><span class="card-tag">Videos + PDFs</span><span class="card-go">Abrir →</span></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14. PROTOTIPOS EXPERIMENTALES -->
+  <section class="catalog-sec sec-alt" id="sec-alt">
+    <div class="sec-header">
+      <div class="sec-title-group">
+        <h2>🧪 Prototipos Alternativos</h2>
+        <span class="tag-cat">Laboratorio I+D</span>
+        <span class="tag-count">2 prototipos</span>
+      </div>
+      <div class="sec-controls">
+        <button class="arrow-btn btn-prev" aria-label="Anterior">‹</button>
+        <button class="arrow-btn btn-next" aria-label="Siguiente">›</button>
+        <button class="toggle-btn" aria-label="Alternar sección">▼</button>
+      </div>
+    </div>
+    <p class="sec-desc">Variantes de experimentación con soporte para periféricos avanzados (gamepads) y motores 3D alternativos.</p>
+    <div class="sec-body">
+      <div class="carousel-wrapper">
+        <div class="carousel-track">
+          <a class="card-sim" href="simuladores/dron/modo-libre-gemini.html">
+            <div class="card-top"><span class="card-ico">🎮</span><span class="card-num">PAD</span></div>
+            <div class="card-title">Modo libre · Gemini Gamepad Edition</div>
+            <div class="card-desc">Edición experimental del simulador de dron con soporte nativo de mandos físicos (Xbox/PS) por Web Gamepad API.</div>
+            <div class="card-foot"><span class="card-tag">Gamepad API</span><span class="card-go">Abrir →</span></div>
+          </a>
+          <a class="card-sim" href="simuladores/meteo/estacion-meteorologica-gemini.html">
+            <div class="card-top"><span class="card-ico">🌐</span><span class="card-num">3D</span></div>
+            <div class="card-title">Estación meteorológica inmersiva</div>
+            <div class="card-desc">Versión alternativa del centro de control con modelos tridimensionales interactivos y simulación física de fluidos.</div>
+            <div class="card-foot"><span class="card-tag">Prototipo 3D</span><span class="card-go">Abrir →</span></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- PIE DE PÁGINA -->
+<footer>
+  <b>Seminario de Tecnologías de la Información y la Comunicación (TIC)</b><br>
+  Centro Universitario Regional Zona Atlántica (CURZA) · Universidad Nacional del Comahue (UNCo)<br>
+  <span>Todos los simuladores son independientes, autocontenidos y funcionan 100% offline en tu dispositivo.</span>
+</footer>
+
+<!-- SCRIPT DE INTERACCIÓN (RUEDA DE MOUSE, DRAG, ACORDEÓN, BÚSQUEDA Y NAVEGACIÓN) -->
+<script>
+  // 1. Navegación vertical fluida entre secciones con rueda del ratón y control horizontal
+  let isNavigatingSection = false;
+
+  document.querySelectorAll('.catalog-sec').forEach(sec => {
+    const track = sec.querySelector('.carousel-track');
+    const btnPrev = sec.querySelector('.btn-prev');
+    const btnNext = sec.querySelector('.btn-next');
+
+    // Manejador de rueda (wheel) en la sección
+    sec.addEventListener('wheel', (e) => {
+      // Caso A: El usuario mantiene Shift presionado, o hace un swipe puramente horizontal (ej. trackpad)
+      if ((e.shiftKey || Math.abs(e.deltaX) > Math.abs(e.deltaY)) && track) {
+        e.preventDefault();
+        track.scrollLeft += (e.deltaX !== 0 ? e.deltaX : e.deltaY) * 1.5;
+        return;
+      }
+
+      // Caso B: Giro vertical de la rueda del mouse (deltaY)
+      // SIEMPRE evitamos que el navegador convierta la rueda vertical en scroll horizontal de las tarjetas
+      if (Math.abs(e.deltaY) > 6) {
+        e.preventDefault();
+
+        if (isNavigatingSection) return;
+
+        const allSecs = Array.from(document.querySelectorAll('.catalog-sec:not([style*="display: none"])'));
+        const idx = allSecs.indexOf(sec);
+
+        if (e.deltaY > 0) {
+          // Rueda abajo -> ir a la siguiente sección completa
+          if (idx !== -1 && idx < allSecs.length - 1) {
+            isNavigatingSection = true;
+            allSecs[idx + 1].scrollIntoView({ behavior: 'smooth', block: 'start' });
+            setTimeout(() => { isNavigatingSection = false; }, 480);
+          } else {
+            // Última sección -> permitir ver el pie de página
+            window.scrollBy({ top: 350, behavior: 'smooth' });
+          }
+        } else if (e.deltaY < 0) {
+          // Rueda arriba -> ir a la sección anterior completa
+          if (idx > 0) {
+            isNavigatingSection = true;
+            allSecs[idx - 1].scrollIntoView({ behavior: 'smooth', block: 'start' });
+            setTimeout(() => { isNavigatingSection = false; }, 480);
+          } else {
+            // Primera sección -> volver arriba
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        }
+      }
+    }, { passive: false });
+
+    // Drag-to-scroll con ratón en el carrusel
+    if (track) {
+      let isDown = false;
+      let startX, scrollLeft;
+      let hasDragged = false;
+
+      track.addEventListener('mousedown', (e) => {
+        isDown = true;
+        hasDragged = false;
+        startX = e.pageX - track.offsetLeft;
+        scrollLeft = track.scrollLeft;
+      });
+
+      track.addEventListener('mouseleave', () => { isDown = false; });
+      track.addEventListener('mouseup', () => {
+        isDown = false;
+        setTimeout(() => { hasDragged = false; }, 60);
+      });
+
+      track.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        const x = e.pageX - track.offsetLeft;
+        const walk = (x - startX) * 1.5;
+        if (Math.abs(walk) > 6) {
+          hasDragged = true;
+          e.preventDefault();
+          track.scrollLeft = scrollLeft - walk;
+        }
+      });
+
+      track.addEventListener('click', (e) => {
+        if (hasDragged) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      }, true);
+    }
+
+    // 2. Botones de navegación de carrusel (‹ y ›)
+    if (btnPrev && track) {
+      btnPrev.addEventListener('click', (e) => {
+        e.stopPropagation();
+        track.scrollBy({ left: -320, behavior: 'smooth' });
+      });
+    }
+
+    if (btnNext && track) {
+      btnNext.addEventListener('click', (e) => {
+        e.stopPropagation();
+        track.scrollBy({ left: 320, behavior: 'smooth' });
+      });
+    }
+
+    // 3. Acordeón / Colapsar sección
+    const header = sec.querySelector('.sec-header');
+    header.addEventListener('click', (e) => {
+      if (e.target.closest('.arrow-btn')) return;
+      sec.classList.toggle('collapsed');
+    });
+  });
+
+  // 4. Botón expandir/contraer todas las secciones
+  const btnToggleAll = document.getElementById('btn-toggle-all');
+  let allCollapsed = false;
+
+  btnToggleAll.addEventListener('click', () => {
+    allCollapsed = !allCollapsed;
+    document.querySelectorAll('.catalog-sec').forEach(sec => {
+      if (allCollapsed) {
+        sec.classList.add('collapsed');
+      } else {
+        sec.classList.remove('collapsed');
+      }
+    });
+    btnToggleAll.textContent = allCollapsed ? '📂 Expandir' : '📁 Contraer';
+  });
+
+  // 5. Barra de píldoras de categorías (scroll directo y filtro)
+  const pills = document.querySelectorAll('.pill');
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      pills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+
+      const targetId = pill.getAttribute('data-target');
+      if (targetId === 'all') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          // Si estaba colapsada, expandirla
+          targetEl.classList.remove('collapsed');
+          targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+          // Efecto de pulso en la sección
+          targetEl.style.boxShadow = '0 0 24px rgba(56, 189, 248, 0.4)';
+          setTimeout(() => {
+            targetEl.style.boxShadow = '';
+          }, 900);
+        }
+      }
+    });
+  });
+
+  // 6. Buscador interactivo en tiempo real
+  const searchInput = document.getElementById('sim-search');
+  searchInput.addEventListener('input', (e) => {
+    const term = e.target.value.toLowerCase().trim();
+    const cards = document.querySelectorAll('.card-sim');
+    const sections = document.querySelectorAll('.catalog-sec');
+
+    if (!term) {
+      cards.forEach(c => c.style.display = 'flex');
+      sections.forEach(s => s.style.display = 'block');
+      return;
+    }
+
+    sections.forEach(sec => {
+      let hasVisible = false;
+      const secCards = sec.querySelectorAll('.card-sim');
+      secCards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        if (text.includes(term)) {
+          card.style.display = 'flex';
+          hasVisible = true;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      if (hasVisible) {
+        sec.style.display = 'block';
+        sec.classList.remove('collapsed'); // Abrir sección si tiene coincidencias
+      } else {
+        sec.style.display = 'none';
+      }
+    });
+  });
+
+  // 7. Sincronización automática de píldoras con la sección visible por snap magnético
+  const secObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        document.querySelectorAll('.catalog-sec').forEach(s => s.classList.remove('in-view'));
+        entry.target.classList.add('in-view');
+
+        document.querySelectorAll('.pill').forEach(pill => {
+          const isMatch = pill.getAttribute('data-target') === id;
+          pill.classList.toggle('active', isMatch);
+          if (isMatch) {
+            pill.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          }
+        });
+      }
+    });
+  }, {
+    rootMargin: '-15% 0px -40% 0px',
+    threshold: 0.2
+  });
+
+  document.querySelectorAll('.catalog-sec').forEach(sec => secObserver.observe(sec));
+</script>
+
+</body>
+</html>
